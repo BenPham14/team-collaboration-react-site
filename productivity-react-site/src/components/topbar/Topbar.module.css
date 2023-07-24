@@ -1,0 +1,33 @@
+.topbar {
+    background-color: white;
+    border-radius: 5px;
+    padding: 0 20px;
+    color: gray;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar div {
+    align-items: center;
+}
+
+.topbar h3 {
+    margin: 0;
+}
+
+.icons {
+    gap: 20px;
+}
+
+.icons > * {
+    cursor: pointer;
+}
+
+.icons div {
+    gap: 5px;
+}
+
+.user {
+    border: 1px solid;
+    border-radius: 50%;
+}

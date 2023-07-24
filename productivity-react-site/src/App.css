@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: whitesmoke;
+}
+
+main {
+  margin-left: 175px;
+  margin-right: 20px;
+  padding-top: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.blk-shadow {
+  box-shadow: 0 0 5px 1px rgba(128, 128, 128, 0.1);
+}
+
+aside .active {
+  background-color: rgb(135, 112, 250);
+  box-shadow: 0 0 5px 1px rgba(135, 110, 255, 0.5);
+  color: white;
+}
