@@ -1,0 +1,32 @@
+.list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    gap: 20px;
+}
+
+.list input[type = text] {
+    border: 1px solid whitesmoke;
+    background-color: whitesmoke;
+    padding: 10px 20px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.list input[type = text]:focus {
+    border: 1px solid rgb(135, 112, 250);
+}
+
+.list input[type = checkbox] {
+    margin: 0 20px;
+}
+
+.tasks {
+    color: gray;
+}
+
+@media only screen and (min-width: 600px) {
+    .list {
+        min-height: 84.5vh;
+    }
+}

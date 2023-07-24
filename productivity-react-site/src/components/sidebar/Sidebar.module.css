@@ -1,4 +1,5 @@
 .aside {
+    display: none;
     width: fit-content;
     padding: 10px;
     background-color: white;
@@ -10,7 +11,8 @@
 .aside > * {
     text-decoration: none;
     color: gray;
-    padding: 10px 15px;
+    padding: 10px;
+    padding-right: 40px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -25,5 +27,11 @@
 }
 
 .aside h3 {
-    margin: 5px 0;
+    margin: 0;
+}
+
+@media only screen and (min-width: 600px) {
+    .aside {
+        display: flex;
+    }
 }
