@@ -1,8 +1,23 @@
-.list {
+.tasks {
+    color: gray;
+}
+
+.tasks section {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     gap: 20px;
+    overflow: hidden;
+}
+
+.sections {
+    gap: 20px;
+}
+
+.list label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .list input[type = text] {
@@ -21,12 +36,18 @@
     margin: 0 20px;
 }
 
-.tasks {
-    color: gray;
+.item {
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 600px) {
     .list {
         min-height: 84.5vh;
+    }
+
+    .sections {
+        grid-template-columns: 2fr 1fr;
     }
 }

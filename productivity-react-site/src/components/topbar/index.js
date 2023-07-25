@@ -10,12 +10,12 @@ const Topbar = () => {
         <div className={`${topbar.topbar} blk-shadow flex`}>
             <h3>Home</h3>
             <div className={`${topbar.icons} flex`}>
-                <div className="flex" onClick={() => setTeamSelect(!teamSelect)}>
-                    <p>Team</p>
+                <div className={`${topbar.team} flex`} onClick={() => setTeamSelect(!teamSelect)}>
+                    <p>Team name</p>
                     {
                         teamSelect ? 
-                            <GoChevronUp /> :
-                            <GoChevronDown />
+                            <GoChevronUp className={topbar.icon}/> :
+                            <GoChevronDown className={topbar.icon}/>
                     }
                 </div>
                 

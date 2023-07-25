@@ -26,14 +26,30 @@ main {
   flex-direction: column;
 }
 
+.grid {
+  display: grid;
+}
+
+.gry-hover:hover {
+  background-color: whitesmoke;
+}
+
 .blk-shadow {
   box-shadow: 0 0 5px 1px rgba(128, 128, 128, 0.1);
 }
 
 aside .active {
-  background-color: rgb(135, 112, 250);
-  box-shadow: 0 0 5px 1px rgba(135, 110, 255, 0.5);
+  /* background-color: rgb(135, 112, 250); */
+  background-image: linear-gradient(to bottom right, rgb(135, 112, 250), rgb(180, 165, 254));
+  /* background-image: linear-gradient(to bottom right, rgb(112, 153, 250), rgb(180, 165, 254)); */
+  box-shadow: 0 0 5px 1px rgba(135, 110, 255, 0.3);
   color: white;
+}
+
+aside > *:not(.active):hover {
+    background-color: whitesmoke;
+    box-shadow: none;
+    color: gray;
 }
 
 @media only screen and (min-width: 600px) {

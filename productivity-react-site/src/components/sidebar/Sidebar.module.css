@@ -19,13 +19,6 @@
     gap: 10px;
 }
 
-.aside > *:hover:not(:first-child) {
-    background-color: whitesmoke;
-    /* box-shadow: 0 0 5px 1px rgba(128, 128, 128, 0.1); */
-    box-shadow: none;
-    color: gray;
-}
-
 .aside h3 {
     margin: 0;
 }

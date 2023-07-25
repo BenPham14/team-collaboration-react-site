@@ -6,7 +6,7 @@ const Sidebar = () => {
     return (
         <aside className={`${sidebar.aside} flex column blk-shadow`}>
             <h3>Name</h3>
-            <NavLink className={sidebar.active} to='/'>
+            <NavLink to='/'>
                 <RiHome6Line />
                 Home
             </NavLink>
