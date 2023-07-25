@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 * {
     box-sizing: border-box;
-    font-family: Roboto;
+    font-family: Poppins;
 }
 
 body {
@@ -16,6 +16,7 @@ main {
   gap: 20px;
   margin: 0 20px;
   padding-top: 20px;
+  margin-left: 77px;
 }
 
 .flex {
@@ -54,6 +55,6 @@ aside > *:not(.active):hover {
 
 @media only screen and (min-width: 600px) {
   main {
-    margin-left: 198px;
+    margin-left: 209px;
   }
 }

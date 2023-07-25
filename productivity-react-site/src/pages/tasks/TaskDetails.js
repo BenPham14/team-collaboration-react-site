@@ -1,9 +1,9 @@
 import tasks from "./Tasks.module.css";
 
-const TaskDetails = () => {
+const TaskDetails = ({selectedTask}) => {
     return (
         <section className={`${tasks.details} blk-shadow`}>
-            hello
+            {selectedTask}
         </section>
     );
 }

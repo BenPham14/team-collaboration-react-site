@@ -6,7 +6,7 @@
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    gap: 20px;
+    /* gap: 10px; */
     overflow: hidden;
 }
 
@@ -14,10 +14,11 @@
     gap: 20px;
 }
 
-.list label {
+.list p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    margin: 0;
 }
 
 .list input[type = text] {
@@ -26,6 +27,7 @@
     padding: 10px 20px;
     border-radius: 5px;
     outline: none;
+    margin-bottom: 10px;
 }
 
 .list input[type = text]:focus {
@@ -33,11 +35,11 @@
 }
 
 .list input[type = checkbox] {
-    margin: 0 20px;
+    margin-right: 20px;
 }
 
 .item {
-    padding: 10px 0;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -46,7 +48,15 @@
     .list {
         min-height: 84.5vh;
     }
+}
 
+@media only screen and (min-width: 768px) {
+    .sections {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 992px) {
     .sections {
         grid-template-columns: 2fr 1fr;
     }

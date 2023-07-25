@@ -1,5 +1,5 @@
-.aside {
-    display: none;
+.aside,
+.mobile {
     width: fit-content;
     padding: 10px;
     background-color: white;
@@ -8,23 +8,30 @@
     gap: 10px;
 }
 
-.aside > * {
+.aside > *,
+.mobile > * {
     text-decoration: none;
     color: gray;
     padding: 10px;
-    padding-right: 40px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+.aside > * {
+    padding-right: 40px;
+}
+
 .aside h3 {
     margin: 0;
 }
 
-@media only screen and (min-width: 600px) {
-    .aside {
-        display: flex;
-    }
+.mobile {
+    align-items: center;
+    padding: 0;
+}
+
+.mobile h3 {
+    font-size: 0.75rem;
 }

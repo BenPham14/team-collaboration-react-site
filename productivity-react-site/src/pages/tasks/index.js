@@ -8,6 +8,7 @@ import TaskDetails from "./TaskDetails";
 const Tasks = () => {
     const [newItem, setNewItem] = useState("");
     const [tasksList, setTaskList] = useState([]);
+    const [selectedTask, setSelectedTask] = useState("");
 
     const addTask = (text) => {
         if (!text) {
@@ -56,11 +57,14 @@ const Tasks = () => {
                                     id={task.id}
                                     label={task.label}
                                     deleteTask={deleteTask}
+                                    setSelectedTask={setSelectedTask}
                                 />
                             ))
                         }
                     </section>
-                    <TaskDetails />
+                    <TaskDetails 
+                        selectedTask={selectedTask}
+                    />
                 </div>
             </main>
         </>

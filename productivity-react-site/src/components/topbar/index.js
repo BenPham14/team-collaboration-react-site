@@ -1,5 +1,5 @@
 import topbar from "./Topbar.module.css";
-import { RiTeamLine, RiUser3Line } from "react-icons/ri";
+import { RiUser3Line } from "react-icons/ri";
 import { GoChevronDown, GoChevronUp } from "react-icons/go"
 import { useState } from "react";
 
