@@ -1,18 +1,10 @@
 import { NavLink } from "react-router-dom";
 import sidebar from "./Sidebar.module.css"
-import { RiHome6Line, RiChat4Line, RiDraftLine, RiFolder2Line, RiLiveLine, RiGroupLine } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../context/AppContext";
 
 const Sidebar = () => {
-    const links = [
-        {label: 'Home', icon: <RiHome6Line />, path: '/'},
-        {label: 'Chat', icon: <RiChat4Line/>, path: '/chat'},
-        {label: 'Tasks', icon: <RiDraftLine />, path: '/tasks'},
-        {label: 'Meetings', icon: <RiLiveLine />, path: '/meetings'},
-        {label: 'Documents', icon: <RiFolder2Line />, path: '/documents'},
-        {label: 'Users', icon: <RiGroupLine />, path: '/users'}
-    ];
-
+    const {links} = useContext(AppContext);
     const [width, setWidth] = useState(0);
 
     useEffect(() => {

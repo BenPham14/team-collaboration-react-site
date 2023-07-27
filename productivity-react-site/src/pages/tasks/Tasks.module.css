@@ -15,22 +15,33 @@
 }
 
 .list p {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     margin: 0;
 }
 
-.list input[type = text] {
+.list div p:first-child {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.list form {
+    grid-template-columns: 3fr 1fr;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.list input[type = text],
+.list input[type = date] {
     border: 1px solid whitesmoke;
     background-color: whitesmoke;
     padding: 10px 20px;
-    border-radius: 5px;
     outline: none;
-    margin-bottom: 10px;
 }
 
-.list input[type = text]:focus {
+.list input[type = text]:focus,
+.list input[type = date]:focus {
     border: 1px solid rgb(135, 112, 250);
 }
 
@@ -42,6 +53,16 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.item div {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item div > *:last-child {
+    font-size: 0.75rem;
 }
 
 @media only screen and (min-width: 600px) {

@@ -43,13 +43,16 @@ const Tasks = () => {
                 <Topbar />
                 <div className={`${tasks.sections} grid`}>
                     <section className={`${tasks.list} flex column blk-shadow`}>
-                        <input 
-                            type="text" 
-                            value={newItem} 
-                            placeholder="+ Press Enter to add task..." 
-                            onChange={(event) => setNewItem(event.target.value)}
-                            onKeyDown={handleEnter}
-                        />
+                        <form className={`grid`}>
+                            <input 
+                                type="text" 
+                                value={newItem} 
+                                placeholder="+ Press Enter to add task..." 
+                                onChange={(event) => setNewItem(event.target.value)}
+                                onKeyDown={handleEnter}
+                            />
+                            <input type="date"/>
+                        </form>
                         {
                             tasksList.map((task) => (
                                 <TaskItem 
