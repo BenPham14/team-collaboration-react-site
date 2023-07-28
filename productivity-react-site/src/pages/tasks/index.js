@@ -7,20 +7,22 @@ import TaskDetails from "./TaskDetails";
 
 const Tasks = () => {
     const [newItem, setNewItem] = useState("");
+    const [newDate, setNewDate] = useState("");
     const [tasksList, setTaskList] = useState([]);
     const [selectedTask, setSelectedTask] = useState("");
 
-    const addTask = (text) => {
+    const addTask = (text, date) => {
         if (!text) {
             return
         };
-
         let item = {
             id: Math.floor(Math.random() * 1000),
-            label: text
+            label: text,
+            date: date
         };
         setTaskList([...tasksList, item]);
         setNewItem("");
+        setNewDate("");
     }
 
     const deleteTask = (item) => {
@@ -32,7 +34,7 @@ const Tasks = () => {
 
     const handleEnter = (event) => {
         if(event.key === 'Enter') { 
-            addTask(newItem)
+            addTask(newItem, newDate);
         };
     }
 
@@ -43,22 +45,25 @@ const Tasks = () => {
                 <Topbar />
                 <div className={`${tasks.sections} grid`}>
                     <section className={`${tasks.list} flex column blk-shadow`}>
-                        <form className={`grid`}>
+                        <form className={`grid`} onKeyDown={handleEnter}>
                             <input 
                                 type="text" 
                                 value={newItem} 
                                 placeholder="+ Press Enter to add task..." 
                                 onChange={(event) => setNewItem(event.target.value)}
-                                onKeyDown={handleEnter}
                             />
-                            <input type="date"/>
+                            <input 
+                                type="date"
+                                value={newDate}
+                                onChange={(event) => setNewDate(event.target.value)}
+                                onKeyDown={(event) => event.preventDefault()}
+                            />
                         </form>
                         {
                             tasksList.map((task) => (
                                 <TaskItem 
                                     key={task.id}
-                                    id={task.id}
-                                    label={task.label}
+                                    task={task}
                                     deleteTask={deleteTask}
                                     setSelectedTask={setSelectedTask}
                                 />

@@ -1,15 +1,15 @@
 import tasks from "./Tasks.module.css";
 
-const TaskItem = ({id, label, deleteTask, setSelectedTask}) => {
+const TaskItem = ({task, deleteTask, setSelectedTask}) => {
     return (
         <>
-            <div className={`${tasks.item} flex gry-hover`} onClick={() => setSelectedTask(label)}>
-                <input type="checkbox" id={id} onClick={() => deleteTask(id)}></input>
+            <button className={`${tasks.item} flex gry-hover`} onClick={() => setSelectedTask(task.label)}>
+                <input type="checkbox" id={task.id} onClick={() => deleteTask(task.id)}></input>
                 <div className="flex">
-                    <p>{label}</p>
-                    <p>date</p>
+                    <p>{task.label}</p>
+                    <p>{task.date}</p>
                 </div>
-            </div>
+            </button>
         </>
     );
 }

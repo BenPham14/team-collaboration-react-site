@@ -40,6 +40,14 @@
     outline: none;
 }
 
+.list input[type = text],
+.list input[type = date]::-webkit-datetime-edit-text,
+.list input[type = date]::-webkit-datetime-edit-month-field,
+.list input[type = date]::-webkit-datetime-edit-day-field,
+.list input[type = date]::-webkit-datetime-edit-year-field {
+    color: gray;
+}
+
 .list input[type = text]:focus,
 .list input[type = date]:focus {
     border: 1px solid rgb(135, 112, 250);
@@ -53,6 +61,9 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    border: none;
+    background-color: white;
+    color: gray;
 }
 
 .item div {
