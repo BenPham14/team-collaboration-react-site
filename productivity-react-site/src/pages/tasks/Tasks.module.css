@@ -22,13 +22,17 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    margin-right: 20px;
+}
+
+.list div p:last-child {
+    white-space: nowrap;
+    text-align: end;
 }
 
 .list form {
-    grid-template-columns: 3fr 1fr;
-    border: 1px solid whitesmoke;
-    border-radius: 5px;
     margin-bottom: 10px;
+    gap: 10px;
     object-fit: cover;
 }
 
@@ -38,6 +42,7 @@
     background-color: whitesmoke;
     padding: 10px 20px;
     outline: none;
+    border-radius: 5px;
 }
 
 .list input[type = text],
@@ -64,16 +69,17 @@
     border: none;
     background-color: white;
     color: gray;
+    align-items: center;
 }
 
 .item div {
-    width: 100%;
+    width: 90%;
     justify-content: space-between;
     align-items: center;
 }
 
 .item div > *:last-child {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
 }
 
 @media only screen and (min-width: 600px) {
@@ -91,5 +97,17 @@
 @media only screen and (min-width: 992px) {
     .sections {
         grid-template-columns: 2fr 1fr;
+    }
+
+    .list form {
+        grid-template-columns: 3fr 1fr;
+        border: 1px solid whitesmoke;
+        border-radius: 5px;
+        gap: 0;
+    }
+
+    .list input[type = text],
+    .list input[type = date] {
+        border-radius: 0;
     }
 }

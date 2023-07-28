@@ -35,6 +35,7 @@ const Tasks = () => {
     const handleEnter = (event) => {
         if(event.key === 'Enter') { 
             addTask(newItem, newDate);
+            event.preventDefault();
         };
     }
 
@@ -56,7 +57,6 @@ const Tasks = () => {
                                 type="date"
                                 value={newDate}
                                 onChange={(event) => setNewDate(event.target.value)}
-                                onKeyDown={(event) => event.preventDefault()}
                             />
                         </form>
                         {
