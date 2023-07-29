@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import tasks from "./Tasks.module.css";
+import { AppContext } from "../../context/AppContext";
+import { RiArrowLeftLine } from "react-icons/ri";
 
-const TaskDetails = ({selectedTask, editTask}) => {
+const TaskDetails = ({selectedTask, editTask, isShowing, setIsShowing}) => {
     const [newTask, setNewTask] = useState("");
     const [newDate, setNewDate] = useState("");
     const [button, setButton] = useState(false);
+    const { screenWidth } = useContext(AppContext);
 
     useEffect(() => {
         setNewTask(selectedTask.label);
@@ -22,13 +25,22 @@ const TaskDetails = ({selectedTask, editTask}) => {
     }
 
     return (
-        <section className={`${tasks.details} blk-shadow flex column`}>
+        <section 
+            className={`${tasks.details} blk-shadow flex column`} 
+            style={{display: (screenWidth < 600) & (isShowing == false) ? "none" : "flex"}}
+        >
             <div className={`${tasks.header} flex`}>
-                <input 
-                    type="date" 
-                    value={newDate} 
-                    onChange={(event) => {setNewDate(event.target.value); setButton(true)}}
-                />
+                <div className={`${tasks.left} flex`}>
+                    {
+                        screenWidth < 600 &&
+                            <RiArrowLeftLine onClick={() => setIsShowing(false)}/>
+                    }
+                    <input 
+                        type="date" 
+                        value={newDate} 
+                        onChange={(event) => {setNewDate(event.target.value); setButton(true)}}
+                    />
+                </div>
                 {   
                     button &&
                         <button onClick={() => handleSubmit()}>Save</button>

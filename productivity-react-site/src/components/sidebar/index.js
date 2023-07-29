@@ -1,24 +1,12 @@
 import { NavLink } from "react-router-dom";
 import sidebar from "./Sidebar.module.css"
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 const Sidebar = () => {
-    const {links} = useContext(AppContext);
-    const [width, setWidth] = useState(0);
+    const { links, screenWidth } = useContext(AppContext);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.innerWidth)
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        handleResize();
-
-    }, [width])
-
-    if (width < 600) {
+    if (screenWidth < 600) {
         return (
             <aside className={`${sidebar.mobile} flex column blk-shadow`}>
                 <h3>Name</h3>

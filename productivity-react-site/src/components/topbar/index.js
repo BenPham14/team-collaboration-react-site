@@ -6,7 +6,7 @@ import { AppContext } from "../../context/AppContext";
 
 const Topbar = () => {
     const [teamSelect, setTeamSelect] = useState(false);
-    const [currentPage, setCurrentPage] = useState("");
+    const [currentPage, setCurrentPage] = useState("Home");
     const { links } = useContext(AppContext);
 
     useEffect(() => {

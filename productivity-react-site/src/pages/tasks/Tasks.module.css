@@ -14,6 +14,10 @@
     gap: 20px;
 }
 
+.list {
+    min-height: calc(100vh - 105px);
+}
+
 .list p {
     margin: 0;
 }
@@ -91,10 +95,6 @@
     gap: 10px;
 }
 
-/* .details h5 {
-    margin: 0;
-} */
-
 .details textarea {
     font-size: 1.5rem;
     padding: 0;
@@ -144,11 +144,28 @@
     -webkit-appearance: none;
 }
 
-@media only screen and (min-width: 768px) {
+.left {
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
     .list {
-        min-height: 84.5vh;
+        position: absolute;
+        right: 20px;
+        left: 77px;
     }
 
+    .details {
+        display: none;
+        position: relative;
+        box-shadow: none;
+        min-height: calc(100vh - 105px);
+    }
+}
+
+@media only screen and (min-width: 768px) {
     .sections {
         grid-template-columns: 1fr 1fr;
     }

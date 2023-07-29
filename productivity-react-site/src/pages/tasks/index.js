@@ -12,6 +12,7 @@ const Tasks = () => {
     const [newDate, setNewDate] = useState("");
     const [tasksList, setTaskList] = useState([]);
     const [selectedTask, setSelectedTask] = useState({});
+    const [isShowing, setIsShowing] = useState(false);
 
     const addTask = (text, date) => {
         if (!text) {
@@ -74,6 +75,7 @@ const Tasks = () => {
                                     task={task}
                                     deleteTask={deleteTask}
                                     setSelectedTask={setSelectedTask}
+                                    setIsShowing={setIsShowing}
                                 />
                             ))
                         }
@@ -81,6 +83,8 @@ const Tasks = () => {
                     <TaskDetails 
                         selectedTask={selectedTask}
                         editTask={editTask}
+                        isShowing={isShowing}
+                        setIsShowing={setIsShowing}
                     />
                 </div>
             </main>
