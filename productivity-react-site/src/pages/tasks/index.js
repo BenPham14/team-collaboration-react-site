@@ -34,9 +34,9 @@ const Tasks = () => {
         }, 200);
     }
 
-    const editTask = (label, id) => {
+    const editTask = (label, date, id) => {
         setTaskList(tasksList.map(task => task.id === id ? 
-            {...task,  label: label} : task
+            {...task,  label: label, date: date} : task
         ))
     }
 

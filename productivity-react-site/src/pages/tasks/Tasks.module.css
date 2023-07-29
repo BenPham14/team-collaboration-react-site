@@ -46,10 +46,10 @@
 }
 
 .list input[type = text],
-.list input[type = date]::-webkit-datetime-edit-text,
-.list input[type = date]::-webkit-datetime-edit-month-field,
-.list input[type = date]::-webkit-datetime-edit-day-field,
-.list input[type = date]::-webkit-datetime-edit-year-field {
+.tasks input[type = date]::-webkit-datetime-edit-text,
+.tasks input[type = date]::-webkit-datetime-edit-month-field,
+.tasks input[type = date]::-webkit-datetime-edit-day-field,
+.tasks input[type = date]::-webkit-datetime-edit-year-field {
     color: gray;
 }
 
@@ -59,12 +59,11 @@
 }
 
 .list input[type = checkbox] {
-    margin-right: 20px;
+    margin: 0 20px;
 }
 
 .item {
-    padding: 10px 20px;
-    cursor: pointer;
+    /* padding: 10px 20px; */
     border: none;
     background-color: white;
     color: gray;
@@ -80,6 +79,8 @@
     width: 90%;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0px;
+    cursor: pointer;
 }
 
 .item div > *:last-child {
@@ -90,9 +91,9 @@
     gap: 10px;
 }
 
-.details h5 {
+/* .details h5 {
     margin: 0;
-}
+} */
 
 .details textarea {
     font-size: 1.5rem;
@@ -113,9 +114,10 @@
 .header {
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid gray;
+    /* border-bottom: 1px solid gray; */
     /* padding-bottom: 10px; */
     min-height: 35px;
+    padding: 0 10px;
 }
 
 .header button {
@@ -127,6 +129,19 @@
     background-image: linear-gradient(to bottom right, rgb(255, 110, 110), rgb(255, 140, 140));
     box-shadow: 0 0 5px 1px rgb(255, 145, 145, 0.3);
     font-size: 0.75rem;
+}
+
+.header input[type = date] {
+    border: none;
+}
+
+.header input[type = date]:focus {
+    outline: none;
+}
+
+.header input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
 }
 
 @media only screen and (min-width: 768px) {
