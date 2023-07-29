@@ -41,6 +41,10 @@
     font-size: 0.875rem;
 }
 
+.team p {
+    font-size: 0.75rem;
+}
+
 .team > * {
     padding: 5px 10px;
     margin: 0;

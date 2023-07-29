@@ -4,19 +4,21 @@ import Topbar from "../../components/topbar";
 import tasks from "./Tasks.module.css";
 import TaskItem from "./TaskItem";
 import TaskDetails from "./TaskDetails";
+import {v4 as uuidv4} from 'uuid';
+uuidv4();
 
 const Tasks = () => {
     const [newItem, setNewItem] = useState("");
     const [newDate, setNewDate] = useState("");
     const [tasksList, setTaskList] = useState([]);
-    const [selectedTask, setSelectedTask] = useState("");
+    const [selectedTask, setSelectedTask] = useState({});
 
     const addTask = (text, date) => {
         if (!text) {
             return
         };
         let item = {
-            id: Math.floor(Math.random() * 1000),
+            id: uuidv4(),
             label: text,
             date: date
         };
@@ -30,6 +32,12 @@ const Tasks = () => {
         setTimeout(() => {
             setTaskList(list);
         }, 200);
+    }
+
+    const editTask = (label, id) => {
+        setTaskList(tasksList.map(task => task.id === id ? 
+            {...task,  label: label} : task
+        ))
     }
 
     const handleEnter = (event) => {
@@ -72,6 +80,7 @@ const Tasks = () => {
                     </section>
                     <TaskDetails 
                         selectedTask={selectedTask}
+                        editTask={editTask}
                     />
                 </div>
             </main>

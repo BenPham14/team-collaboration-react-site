@@ -82,13 +82,31 @@
     font-size: 0.6875rem;
 }
 
-@media only screen and (min-width: 600px) {
-    .list {
-        min-height: 84.5vh;
-    }
+.details {
+    gap: 10px;
+}
+
+.details h5 {
+    margin: 0;
+}
+
+.details h5 {
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+.details input[type = text]:first-of-type {
+    font-size: 1.5rem;
+    padding: 0;
+    border: none;
+    color: gray;
 }
 
 @media only screen and (min-width: 768px) {
+    .list {
+        min-height: 84.5vh;
+    }
+
     .sections {
         grid-template-columns: 1fr 1fr;
     }
