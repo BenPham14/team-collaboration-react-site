@@ -64,12 +64,16 @@
 
 .item {
     padding: 10px 20px;
-    border-radius: 5px;
     cursor: pointer;
     border: none;
     background-color: white;
     color: gray;
     align-items: center;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.item:hover {
+    border-radius: 5px;
 }
 
 .item div {
@@ -90,16 +94,39 @@
     margin: 0;
 }
 
-.details h5 {
-    border-bottom: 1px solid gray;
-    padding-bottom: 10px;
-}
-
-.details input[type = text]:first-of-type {
+.details textarea {
     font-size: 1.5rem;
     padding: 0;
     border: none;
     color: gray;
+    height: 100%;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 20px;
+    resize: none;
+}
+
+.details textarea:focus {
+    outline: none;
+}
+
+.header {
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    /* padding-bottom: 10px; */
+    min-height: 35px;
+}
+
+.header button {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    padding: 2px 8px;
+    background-image: linear-gradient(to bottom right, rgb(255, 110, 110), rgb(255, 140, 140));
+    box-shadow: 0 0 5px 1px rgb(255, 145, 145, 0.3);
+    font-size: 0.75rem;
 }
 
 @media only screen and (min-width: 768px) {
