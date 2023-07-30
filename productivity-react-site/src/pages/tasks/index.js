@@ -54,7 +54,7 @@ const Tasks = () => {
             <main className={tasks.tasks}>
                 <Topbar />
                 <div className={`${tasks.sections} grid`}>
-                    <section className={`${tasks.list} flex column blk-shadow`}>
+                    <section className={`${tasks.list} flex column`}>
                         <form className={`grid`} onKeyDown={handleEnter}>
                             <input 
                                 type="text" 

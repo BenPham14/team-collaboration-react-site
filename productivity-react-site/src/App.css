@@ -19,6 +19,14 @@ main {
   margin-left: 77px;
 }
 
+section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 1px rgba(128, 128, 128, 0.1);
+    color: gray;
+}
+
 .flex {
   display: flex;
 }

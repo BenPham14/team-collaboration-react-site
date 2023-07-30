@@ -34,9 +34,10 @@
 }
 
 .team {
-    background-image: linear-gradient(to bottom right, rgb(110, 153, 254), rgb(155, 184, 253));
-    box-shadow: 0 0 5px 1px rgba(110, 153, 254, 0.3);
-    color: white;
+    background-color: whitesmoke;
+    /* background-image: linear-gradient(to bottom right, rgb(110, 153, 254), rgb(155, 184, 253)); */
+    /* box-shadow: 0 0 5px 1px rgba(110, 153, 254, 0.3); */
+    /* color: white; */
     border-radius: 5px;
     font-size: 0.875rem;
 }

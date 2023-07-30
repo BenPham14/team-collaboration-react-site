@@ -1,0 +1,69 @@
+.sections {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 20px;
+    height: calc(100vh - 105px);
+}
+
+.chat p {
+    margin: 0;
+}
+
+.messages {
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.bar {
+    align-items: center;
+}
+
+.bar > div {
+    padding: 10px 20px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.bar input {
+    width: 100%;
+    border: none;
+    background-color: whitesmoke;
+}
+
+.bar input:focus {
+    outline: none;
+}
+
+.owner,
+.other {
+    align-items: center;
+}
+
+.owner {
+    justify-content: end;
+}
+
+.owner p,
+.other p {
+    margin: 0px;
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.owner p {
+    background-color: rgb(155, 184, 253);
+    color: white;
+}
+
+.other p {
+    background-color: rgb(215, 215, 215);
+    color: white;
+}
+
+.members {
+    align-items: center;
+    gap: 20px;
+    grid-row: span 2;
+}

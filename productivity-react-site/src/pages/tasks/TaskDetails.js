@@ -21,12 +21,12 @@ const TaskDetails = ({selectedTask, editTask, isShowing, setIsShowing}) => {
     }
 
     if (selectedTask.label == null) {
-        return <section className={`${tasks.details} blk-shadow flex column`}></section>
+        return <section className={`${tasks.details} flex column`}></section>
     }
 
     return (
         <section 
-            className={`${tasks.details} blk-shadow flex column`} 
+            className={`${tasks.details} flex column`} 
             style={{display: (screenWidth < 600) & (isShowing == false) ? "none" : "flex"}}
         >
             <div className={`${tasks.header} flex`}>
