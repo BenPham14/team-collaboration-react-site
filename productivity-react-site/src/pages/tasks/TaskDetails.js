@@ -27,12 +27,12 @@ const TaskDetails = ({selectedTask, editTask, isShowing, setIsShowing}) => {
     return (
         <section 
             className={`${tasks.details} flex column`} 
-            style={{display: (screenWidth < 600) & (isShowing == false) ? "none" : "flex"}}
+            style={{display: (screenWidth < 768) & (isShowing == false) ? "none" : "flex"}}
         >
             <div className={`${tasks.header} flex`}>
                 <div className={`${tasks.left} flex`}>
                     {
-                        screenWidth < 600 &&
+                        screenWidth < 768 &&
                             <RiArrowLeftLine onClick={() => setIsShowing(false)}/>
                     }
                     <input 
