@@ -20,7 +20,7 @@ const Chat = () => {
             <main className={chat.chat}>
                 <Topbar />
                 <div className={`${chat.sections} grid`}>
-                    <section className={`${chat.members} flex column`}>
+                    <section className={`${chat.members} flex`}>
                         <p>Team</p>
                         <RiUser3Line/>
                         <RiUser3Line/>
@@ -40,7 +40,7 @@ const Chat = () => {
                     </section>
                     <section className={chat.bar}>
                         <div className="flex">
-                            <input placeholder="Message"/>
+                            <input type="text" placeholder="Message"/>
                             <RiSendPlane2Line />
                         </div>
                     </section>

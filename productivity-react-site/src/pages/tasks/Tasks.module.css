@@ -42,7 +42,6 @@
     border-radius: 5px;
 }
 
-.list input[type = text],
 .tasks input[type = date]::-webkit-datetime-edit-text,
 .tasks input[type = date]::-webkit-datetime-edit-month-field,
 .tasks input[type = date]::-webkit-datetime-edit-day-field,

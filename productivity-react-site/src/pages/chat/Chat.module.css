@@ -1,6 +1,4 @@
 .sections {
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr auto;
     gap: 20px;
     height: calc(100vh - 105px);
 }
@@ -27,8 +25,6 @@
 
 .bar input {
     width: 100%;
-    border: none;
-    background-color: whitesmoke;
 }
 
 .bar input:focus {
@@ -50,6 +46,7 @@
     max-width: 80%;
     border-radius: 10px;
     padding: 10px;
+    word-wrap: break-word;
 }
 
 .owner p {
@@ -66,4 +63,15 @@
     align-items: center;
     gap: 20px;
     grid-row: span 2;
+}
+
+@media only screen and (min-width: 600px) {
+    .sections {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr auto;
+    }
+
+    .members {
+        flex-direction: column;
+    }
 }

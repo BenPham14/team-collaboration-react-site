@@ -1,0 +1,28 @@
+.login {
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.login > div {
+    width: 80%;
+    height: fit-content;
+    max-width: fit-content;
+    background-color: white;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.login p {
+    margin: 0;
+}
+
+.login button {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+}
