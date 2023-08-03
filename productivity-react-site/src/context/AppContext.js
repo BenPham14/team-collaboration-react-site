@@ -5,6 +5,7 @@ const AppContext = createContext();
 
 const AppContextProvider = (props) => {
     const [screenWidth, setScreenWidth] = useState(0);
+    const [currentTeam, setCurrentTeam] = useState("Team 1");
 
     useEffect(() => {
         const handleResize = () => {
@@ -26,7 +27,7 @@ const AppContextProvider = (props) => {
         {label: 'Users', icon: <RiGroupLine />, path: '/users'}
     ];
 
-    const contextValue = { links, screenWidth };
+    const contextValue = { links, screenWidth, currentTeam, setCurrentTeam };
 
     return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>
 }

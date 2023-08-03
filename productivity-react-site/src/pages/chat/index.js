@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar";
 import Topbar from "../../components/topbar";
 import chat from "./Chat.module.css";
 import Message from "./Message";
 import { RiSendPlane2Line, RiUser3Line } from "react-icons/ri";
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
+import { AppContext } from "../../context/AppContext";
 
 const Chat = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesRef = collection(db, "messages");
+    const { currentTeam } = useContext(AppContext);
+    const [messages, setMessages] = useState([]);
 
     const users = [
         {name: "hello", image: null},
@@ -18,16 +21,33 @@ const Chat = () => {
         {name: "hello", image: null}
     ]
 
-    const messages = [
-        {person: chat.owner, text: 'Hello'},
-        {person: chat.other, text: 'Hello'},
-        {person: chat.owner, text: 'Hello'},
-        {person: chat.other, text: 'Hello'},
-        {person: chat.owner, text: 'Hello'},
-        {person: chat.other, text: 'Hello'},
-        {person: chat.owner, text: 'Hello'},
-        {person: chat.other, text: 'Hello'}
-    ];
+    // const messages = [
+    //     {person: chat.owner, text: 'Hello'},
+    //     {person: chat.other, text: 'Hello'},
+    //     {person: chat.owner, text: 'Hello'},
+    //     {person: chat.other, text: 'Hello'},
+    //     {person: chat.owner, text: 'Hello'},
+    //     {person: chat.other, text: 'Hello'},
+    //     {person: chat.owner, text: 'Hello'},
+    //     {person: chat.other, text: 'Hello'}
+    // ];
+
+    useEffect(() => {
+        const queryMessages = query( // get messages where team == team
+            messagesRef, 
+            where("team", "==", currentTeam),
+            orderBy("createdAt")
+        );
+        const unsubscribe = onSnapshot(queryMessages, (snapshot) => { // listens for changes in db query
+            let messages = [];
+            snapshot.forEach((doc) => {
+                messages.push({...doc.data(), id: doc.id}); // push a all messages to local array
+            });
+            setMessages(messages);
+        });
+
+        return () => unsubscribe(); // cleanup useEffect
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -37,7 +57,7 @@ const Chat = () => {
         await addDoc(messagesRef, { // reference collection that you want to add to
             text: newMessage, // data that you want to add
             createdAt: serverTimestamp(),
-            // team: "",
+            team: currentTeam,
             user: auth.currentUser.displayName
         });
         setNewMessage("");
@@ -62,9 +82,9 @@ const Chat = () => {
                     </section>
                     <section className={`${chat.messages} flex column`}>
                         {
-                            messages.map((message, index) => (
+                            messages.map((message) => (
                                 <Message
-                                    key={index}
+                                    key={message.id}
                                     message={message}
                                 />
                             ))

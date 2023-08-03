@@ -7,7 +7,7 @@ import { AppContext } from "../../context/AppContext";
 const Topbar = () => {
     const [teamSelect, setTeamSelect] = useState(false);
     const [currentPage, setCurrentPage] = useState("Home");
-    const { links } = useContext(AppContext);
+    const { links, currentTeam, setCurrentTeam } = useContext(AppContext);
 
     useEffect(() => {
         links.filter((link) => (
@@ -20,7 +20,7 @@ const Topbar = () => {
             <h3>{currentPage}</h3>
             <div className={`${topbar.icons} flex`}>
                 <div className={`${topbar.team} flex`} onClick={() => setTeamSelect(!teamSelect)}>
-                    <p>Team name</p>
+                    <p>{currentTeam}</p>
                     {
                         teamSelect ? 
                             <GoChevronUp className={topbar.icon}/> :
