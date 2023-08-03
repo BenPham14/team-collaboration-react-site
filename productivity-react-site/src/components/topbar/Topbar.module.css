@@ -28,11 +28,6 @@
     gap: 5px;
 }
 
-.user {
-    border: 1px solid;
-    border-radius: 50%;
-}
-
 .team {
     background-color: whitesmoke;
     /* background-image: linear-gradient(to bottom right, rgb(110, 153, 254), rgb(155, 184, 253)); */

@@ -53,6 +53,11 @@ input[type = text] {
   box-shadow: 0 0 5px 1px rgba(128, 128, 128, 0.1);
 }
 
+.placeholder {
+  border: 1px solid;
+  border-radius: 50%;
+}
+
 aside .active {
   /* background-color: rgb(135, 112, 250); */
   background-image: linear-gradient(to bottom right, rgb(135, 112, 250), rgb(180, 165, 254));

@@ -28,7 +28,7 @@ const Topbar = () => {
                     }
                 </div>
                 
-                <RiUser3Line className={topbar.user}/>
+                <RiUser3Line className="placeholder"/>
             </div>
         </div>
     );

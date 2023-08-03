@@ -1,5 +1,4 @@
 .tasks section {
-    /* gap: 10px; */
     overflow: hidden;
 }
 
@@ -49,9 +48,16 @@
     color: gray;
 }
 
-.list input[type = text]:focus,
+.list input[type = text]:focus {
+    border: 1px solid rgb(135, 112, 250);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
 .list input[type = date]:focus {
     border: 1px solid rgb(135, 112, 250);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .list input[type = checkbox] {

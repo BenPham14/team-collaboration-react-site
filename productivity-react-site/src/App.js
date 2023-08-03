@@ -11,11 +11,11 @@ import { Auth } from './components/auth';
 const cookies = new Cookies();
 
 function App() {
-  const [isAuth, setIsAuth] = useState(cookies.get("auth-token"));
+  const [isAuth, setIsAuth] = useState(cookies.get("auth-token")); // returns false
 
   if (!isAuth) {
     return (
-      <Auth />
+      <Auth setIsAuth={setIsAuth}/> // pass setIsAuth so that isAuth is set to true when token is set
     );
   }
 

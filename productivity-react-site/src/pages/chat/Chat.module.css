@@ -10,13 +10,14 @@
 .messages {
     gap: 20px;
     overflow-y: auto;
+    height: 100%;
 }
 
 .bar {
     align-items: center;
 }
 
-.bar > div {
+.bar form {
     padding: 10px 20px;
     background-color: whitesmoke;
     border-radius: 5px;
@@ -29,6 +30,11 @@
 
 .bar input:focus {
     outline: none;
+}
+
+.bar button {
+    border: none;
+    color: gray;
 }
 
 .owner,
@@ -63,6 +69,13 @@
     align-items: center;
     gap: 20px;
     grid-row: span 2;
+}
+
+@media only screen and (max-width: 599.9px) {
+    .sections {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media only screen and (min-width: 600px) {
