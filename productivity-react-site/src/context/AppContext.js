@@ -5,7 +5,7 @@ const AppContext = createContext();
 
 const AppContextProvider = (props) => {
     const [screenWidth, setScreenWidth] = useState(0);
-    const [currentTeam, setCurrentTeam] = useState("Team 1");
+    const [currentTeam, setCurrentTeam] = useState("");
 
     useEffect(() => {
         const handleResize = () => {

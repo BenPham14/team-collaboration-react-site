@@ -41,7 +41,8 @@
 }
 
 .team p,
-.dropDown p {
+.dropDown p,
+.dropDown button {
     font-size: 0.75rem;
 }
 
@@ -73,4 +74,12 @@
 .dropDown p {
     background-color: white;
     border-radius: 5px;
+}
+
+.dropDown button {
+    border: none;
+    background-color: white;
+    width: 100%;
+    color: gray;
+    cursor: pointer;
 }

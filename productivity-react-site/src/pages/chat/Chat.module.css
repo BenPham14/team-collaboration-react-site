@@ -35,6 +35,8 @@
 .bar button {
     border: none;
     color: gray;
+    background-color: whitesmoke;
+    cursor: pointer;
 }
 
 .owner,
@@ -58,7 +60,8 @@
 }
 
 .owner img,
-.other img {
+.other img,
+.members img {
     height: 30px;
     border-radius: 50%;
 }

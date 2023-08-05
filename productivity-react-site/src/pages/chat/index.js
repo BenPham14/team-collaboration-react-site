@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar";
 import Topbar from "../../components/topbar";
 import chat from "./Chat.module.css";
 import Message from "./Message";
-import { RiSendPlane2Line, RiUser3Line } from "react-icons/ri";
+import { RiSendPlane2Line } from "react-icons/ri";
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
 import { AppContext } from "../../context/AppContext";
@@ -11,31 +11,44 @@ import { AppContext } from "../../context/AppContext";
 const Chat = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesRef = collection(db, "messages"); // get data from firebase collection
+    const teamsRef = collection(db, "teams");
     const { currentTeam } = useContext(AppContext);
     const [messages, setMessages] = useState([]);
-
-    const users = [
-        {name: "hello", image: null},
-        {name: "hello", image: null},
-        {name: "hello", image: null},
-        {name: "hello", image: null}
-    ]
+    const [members, setMembers] = useState([]);
 
     useEffect(() => {
-        const queryMessages = query( // get messages where team == team
-            messagesRef, 
-            where("team", "==", currentTeam),
-            orderBy("createdAt")
-        );
-        const unsubscribe = onSnapshot(queryMessages, (snapshot) => { // listens for changes in db query
-            let messages = [];
-            snapshot.forEach((doc) => {
-                messages.push({...doc.data(), id: doc.id}); // push a all messages to local array
+        const getMessages = () => {
+            const queryMessages = query( // get messages where team == team
+                messagesRef, 
+                where("team", "==", currentTeam),
+                orderBy("createdAt")
+            );
+            onSnapshot(queryMessages, (snapshot) => { // listens for changes in db query
+                let messages = [];
+                snapshot.forEach((doc) => {
+                    messages.push({...doc.data(), id: doc.id}); // push a all messages to local array
+                });
+                setMessages(messages);
             });
-            setMessages(messages);
-        });
+        };
 
-        return () => unsubscribe(); // cleanup useEffect to end functions that subscribe to listening services like onSnapshot
+        const getMembers = () => {
+            const queryTeams = query(
+                teamsRef,
+                where("name", "==", currentTeam)
+            );
+            onSnapshot(queryTeams, (snapshot) => {
+                let members = [];
+                snapshot.forEach((doc) => {
+                    members.push({...doc.data(), id: doc.id});
+                });
+                setMembers(members);
+            });
+        }
+        
+        getMessages();
+        getMembers();
+        // return () => unsubscribe(); // cleanup useEffect to end functions that subscribe to listening services like onSnapshot
     }, [currentTeam]);
 
     const handleSubmit = async (event) => {
@@ -63,12 +76,11 @@ const Chat = () => {
                     <section className={`${chat.members} flex`}>
                         <p>Team</p>
                         {
-                            users.map((user, index) => {
-                                if (user.image) {
-                                    return <img key={index} src={user.image} alt={user.name}/>
-                                }
-                                return <RiUser3Line key={index} className="placeholder"/>
-                            })
+                            members.map((member) => (
+                                member.memberDetails.map((details) =>
+                                    <img key={details.uid} src={details.image} alt={details.name}/>
+                                )
+                            ))
                         }
                     </section>
                     <section className={`${chat.messages} flex column`}>
@@ -80,7 +92,6 @@ const Chat = () => {
                                 />
                             ))
                         }
-                        
                     </section>
                     <section className={chat.bar}>
                         <form className="flex" onSubmit={handleSubmit}>
@@ -94,7 +105,6 @@ const Chat = () => {
                         </form>
                     </section>
                 </div>
-                
             </main>
         </>
     );

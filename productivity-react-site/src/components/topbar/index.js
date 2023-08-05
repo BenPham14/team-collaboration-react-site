@@ -19,22 +19,22 @@ const Topbar = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setProfile(auth.currentUser);
+
+                const queryTeams = query(
+                    teamsRef,
+                    where("members", "array-contains", auth.currentUser.uid)
+                );
+                const unsubscribe = onSnapshot(queryTeams, (snapshot) => {
+                    let teams = [];
+                    snapshot.forEach((doc) => {
+                        teams.push({...doc.data(), id: doc.id});
+                    });
+                    setTeams(teams);
+                    setCurrentTeam(teams[0] ? teams[0].name : "");
+                });
+                return () => unsubscribe();
             }
         });
-
-        const queryTeams = query(
-            teamsRef,
-            where("members", "array-contains", "NfrIMKljjWSGE7480qVDq4eG3lt1")
-        );
-        const unsubscribe = onSnapshot(queryTeams, (snapshot) => {
-            let teams = [];
-            snapshot.forEach((doc) => {
-                teams.push({...doc.data(), id: doc.id});
-            });
-            setTeams(teams);
-        });
-
-        return () => unsubscribe();
     },[]);
 
     useEffect(() => {
@@ -58,7 +58,7 @@ const Topbar = () => {
                         teamSelect &&
                         <div className={`${topbar.dropDown} flex column`}>
                             <p>+ Create Team</p>
-                            {/* <button onClick={() => setCurrentTeam(teams[0].name)}>{teams[0].name}</button> */}
+                            <button onClick={() => setCurrentTeam(teams[0].name)}>{teams[0].name}</button>
                         </div>
                     }
                 </div>
