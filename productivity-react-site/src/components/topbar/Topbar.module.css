@@ -34,19 +34,19 @@
 }
 
 .team {
+    position: relative;
     background-color: whitesmoke;
-    /* background-image: linear-gradient(to bottom right, rgb(110, 153, 254), rgb(155, 184, 253)); */
-    /* box-shadow: 0 0 5px 1px rgba(110, 153, 254, 0.3); */
-    /* color: white; */
     border-radius: 5px;
-    font-size: 0.875rem;
+    z-index: 1;
 }
 
-.team p {
+.team p,
+.dropDown p {
     font-size: 0.75rem;
 }
 
-.team > * {
+.team > *,
+.dropDown p{
     padding: 5px 10px;
     margin: 0;
 }
@@ -54,4 +54,23 @@
 .icon {
     height: 100%;
     width: auto;
+}
+
+.active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dropDown {
+    position: absolute;
+    background-color: whitesmoke;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    top: 27px;
+}
+
+.dropDown p {
+    background-color: white;
+    border-radius: 5px;
 }

@@ -36,7 +36,7 @@ const Chat = () => {
         });
 
         return () => unsubscribe(); // cleanup useEffect to end functions that subscribe to listening services like onSnapshot
-    }, []);
+    }, [currentTeam]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
