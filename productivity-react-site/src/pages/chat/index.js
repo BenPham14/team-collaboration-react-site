@@ -10,7 +10,7 @@ import { AppContext } from "../../context/AppContext";
 
 const Chat = () => {
     const [newMessage, setNewMessage] = useState("");
-    const messagesRef = collection(db, "messages");
+    const messagesRef = collection(db, "messages"); // get data from firebase collection
     const { currentTeam } = useContext(AppContext);
     const [messages, setMessages] = useState([]);
 
@@ -20,17 +20,6 @@ const Chat = () => {
         {name: "hello", image: null},
         {name: "hello", image: null}
     ]
-
-    // const messages = [
-    //     {person: chat.owner, text: 'Hello'},
-    //     {person: chat.other, text: 'Hello'},
-    //     {person: chat.owner, text: 'Hello'},
-    //     {person: chat.other, text: 'Hello'},
-    //     {person: chat.owner, text: 'Hello'},
-    //     {person: chat.other, text: 'Hello'},
-    //     {person: chat.owner, text: 'Hello'},
-    //     {person: chat.other, text: 'Hello'}
-    // ];
 
     useEffect(() => {
         const queryMessages = query( // get messages where team == team
@@ -46,7 +35,7 @@ const Chat = () => {
             setMessages(messages);
         });
 
-        return () => unsubscribe(); // cleanup useEffect
+        return () => unsubscribe(); // cleanup useEffect to end functions that subscribe to listening services like onSnapshot
     }, []);
 
     const handleSubmit = async (event) => {
@@ -58,7 +47,9 @@ const Chat = () => {
             text: newMessage, // data that you want to add
             createdAt: serverTimestamp(),
             team: currentTeam,
-            user: auth.currentUser.displayName
+            uid: auth.currentUser.uid,
+            user: auth.currentUser.displayName,
+            image: auth.currentUser.photoURL
         });
         setNewMessage("");
     };

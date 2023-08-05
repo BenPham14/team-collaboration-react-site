@@ -40,10 +40,12 @@
 .owner,
 .other {
     align-items: center;
+    gap: 10px;
 }
 
 .owner {
     justify-content: end;
+    flex-direction: row-reverse;
 }
 
 .owner p,
@@ -53,6 +55,12 @@
     border-radius: 10px;
     padding: 10px;
     word-wrap: break-word;
+}
+
+.owner img,
+.other img {
+    height: 30px;
+    border-radius: 50%;
 }
 
 .owner p {

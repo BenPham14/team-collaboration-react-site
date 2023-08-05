@@ -16,6 +16,11 @@
     margin: 0;
 }
 
+.topbar img {
+    height: 20px;
+    border-radius: 50%;
+}
+
 .icons {
     gap: 20px;
 }
