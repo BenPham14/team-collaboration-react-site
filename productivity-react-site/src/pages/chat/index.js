@@ -11,44 +11,24 @@ import { AppContext } from "../../context/AppContext";
 const Chat = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesRef = collection(db, "messages"); // get data from firebase collection
-    const teamsRef = collection(db, "teams");
     const { currentTeam } = useContext(AppContext);
     const [messages, setMessages] = useState([]);
-    const [members, setMembers] = useState([]);
 
     useEffect(() => {
-        const getMessages = () => {
-            const queryMessages = query( // get messages where team == team
-                messagesRef, 
-                where("team", "==", currentTeam),
-                orderBy("createdAt")
-            );
-            onSnapshot(queryMessages, (snapshot) => { // listens for changes in db query
-                let messages = [];
-                snapshot.forEach((doc) => {
-                    messages.push({...doc.data(), id: doc.id}); // push a all messages to local array
-                });
-                setMessages(messages);
+        const queryMessages = query( // get messages where team == team
+            messagesRef, 
+            where("team", "==", currentTeam),
+            orderBy("createdAt")
+        );
+        const unsubscribe = onSnapshot(queryMessages, (snapshot) => { // listens for changes in db query
+            let messages = [];
+            snapshot.forEach((doc) => {
+                messages.push({...doc.data(), id: doc.id}); // push a all messages to local array
             });
-        };
+            setMessages(messages);
+        });
 
-        const getMembers = () => {
-            const queryTeams = query(
-                teamsRef,
-                where("name", "==", currentTeam)
-            );
-            onSnapshot(queryTeams, (snapshot) => {
-                let members = [];
-                snapshot.forEach((doc) => {
-                    members.push({...doc.data(), id: doc.id});
-                });
-                setMembers(members);
-            });
-        }
-        
-        getMessages();
-        getMembers();
-        // return () => unsubscribe(); // cleanup useEffect to end functions that subscribe to listening services like onSnapshot
+        return () => unsubscribe(); // cleanup useEffect to end functions that subscribe to listening services like onSnapshot
     }, [currentTeam]);
 
     const handleSubmit = async (event) => {
@@ -73,16 +53,6 @@ const Chat = () => {
             <main className={chat.chat}>
                 <Topbar />
                 <div className={`${chat.sections} grid`}>
-                    <section className={`${chat.members} flex`}>
-                        <p>Team</p>
-                        {
-                            members.map((member) => (
-                                member.memberDetails.map((details) =>
-                                    <img key={details.uid} src={details.image} alt={details.name}/>
-                                )
-                            ))
-                        }
-                    </section>
                     <section className={`${chat.messages} flex column`}>
                         {
                             messages.map((message) => (

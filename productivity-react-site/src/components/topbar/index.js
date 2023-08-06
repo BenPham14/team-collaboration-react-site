@@ -5,24 +5,26 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query, serverTimestamp, where } from 'firebase/firestore';
 
 const Topbar = () => {
     const [teamSelect, setTeamSelect] = useState(false);
     const [teams, setTeams] = useState([]);
     const [currentPage, setCurrentPage] = useState("Home");
     const [profile, setProfile] = useState("");
+    const [createOpen, setCreateOpen] = useState(false);
+    const [newName, setNewName] = useState("");
     const { links, currentTeam, setCurrentTeam } = useContext(AppContext);
     const teamsRef = collection(db, "teams");
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setProfile(auth.currentUser);
+                setProfile(user);
 
                 const queryTeams = query(
                     teamsRef,
-                    where("members", "array-contains", auth.currentUser.uid)
+                    where("members", "array-contains", user.uid)
                 );
                 const unsubscribe = onSnapshot(queryTeams, (snapshot) => {
                     let teams = [];
@@ -43,6 +45,25 @@ const Topbar = () => {
         ));
     }, [window.location.hash]);
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (newName === "") {
+            return
+        };
+        await addDoc(teamsRef, {
+            name: newName,
+            createdAt: serverTimestamp(),
+            members: [auth.currentUser.uid],
+            memberDetails: [{
+                uid: auth.currentUser.uid,
+                name: auth.currentUser.displayName, 
+                image: auth.currentUser.photoURL
+            }]
+        });
+        setNewName("");
+        setCreateOpen(!createOpen);
+    };
+
     return (
         <div className={`${topbar.topbar} blk-shadow flex`}>
             <h3>{currentPage}</h3>
@@ -57,11 +78,25 @@ const Topbar = () => {
                     {
                         teamSelect &&
                         <div className={`${topbar.dropDown} flex column`}>
-                            <p>+ Create Team</p>
-                            <button onClick={() => setCurrentTeam(teams[0].name)}>{teams[0].name}</button>
+                            <button onClick={() => setCreateOpen(!createOpen)}>+ Create Team</button>
+                            {
+                                teams.map((team) => (
+                                    <button key={team.id} onClick={() => setCurrentTeam(team.name)}>{team.name}</button>
+                                ))
+                            }
+                            
                         </div>
                     }
                 </div>
+                <dialog className={topbar.create} open={createOpen}>
+                    <form className="flex column" onSubmit={handleSubmit}>
+                        <input type="text" value={newName} onChange={(event) => setNewName(event.target.value)}/>
+                        <div className="flex">
+                            <button type="submit">Create</button>
+                            <button type="button" onClick={() => setCreateOpen(!createOpen)}>Cancel</button>
+                        </div>
+                    </form>
+                </dialog>
                 
                 {
                     profile ? 

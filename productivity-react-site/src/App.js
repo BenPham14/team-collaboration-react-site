@@ -1,12 +1,13 @@
 import './App.css';
+import { useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
+import { Auth } from './components/auth';
+import { AppContextProvider } from './context/AppContext';
 import Home from './pages/home';
 import Tasks from './pages/tasks';
-import { AppContextProvider } from './context/AppContext';
 import Chat from './pages/chat';
-import { useState } from 'react';
+import Users from './pages/users';
 import Cookies from 'universal-cookie';
-import { Auth } from './components/auth';
 
 const cookies = new Cookies();
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/tasks' element={<Tasks/>}/>
           <Route path='/chat' element={<Chat/>}/>
+          <Route path='/users' element={<Users/>}/>
         </Routes>
       </HashRouter>
     </AppContextProvider>

@@ -41,13 +41,11 @@
 }
 
 .team p,
-.dropDown p,
-.dropDown button {
+.dropDown > * {
     font-size: 0.75rem;
 }
 
-.team > *,
-.dropDown p{
+.team > * {
     padding: 5px 10px;
     margin: 0;
 }
@@ -71,15 +69,23 @@
     top: 27px;
 }
 
-.dropDown p {
+.dropDown button {
     background-color: white;
     border-radius: 5px;
-}
-
-.dropDown button {
     border: none;
-    background-color: white;
     width: 100%;
     color: gray;
     cursor: pointer;
+}
+
+.create {
+    top: 40vh;
+}
+
+.create form {
+    gap: 10px;
+}
+
+.create button {
+    width: 100%;
 }
