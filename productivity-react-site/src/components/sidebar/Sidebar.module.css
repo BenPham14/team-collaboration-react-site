@@ -36,3 +36,21 @@
 .mobile h3 {
     font-size: 0.75rem;
 }
+
+.aside h6 {
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+    bottom: 20px;
+}
+
+.aside h6:hover,
+.aside h3:hover {
+    background-color: white;
+}
+
+@media only screen and (min-height: 380px) {
+    .aside h6 {
+        position: absolute;
+    }
+}

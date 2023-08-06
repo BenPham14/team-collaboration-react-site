@@ -32,6 +32,8 @@ const Sidebar = () => {
                     </NavLink>
                 ))
             }
+
+            <h6>Benjamin Pham &copy; 2023</h6>
         </aside>
     );
 }

@@ -32,7 +32,12 @@ const Topbar = () => {
                         teams.push({...doc.data(), id: doc.id});
                     });
                     setTeams(teams);
-                    setCurrentTeam(teams[0] ? teams[0].name : "");
+
+                    if (currentTeam === "" && teams[0]) {
+                        setCurrentTeam(teams[0].name);
+                    } else if (currentTeam === "" && !teams[0]){
+                        setCreateOpen(true);
+                    };
                 });
                 return () => unsubscribe();
             }
@@ -88,7 +93,7 @@ const Topbar = () => {
                         </div>
                     }
                 </div>
-                <dialog className={topbar.create} open={createOpen}>
+                <dialog className={`${topbar.create} blk-shadow`} open={createOpen}>
                     <form className="flex column" onSubmit={handleSubmit}>
                         <input type="text" value={newName} onChange={(event) => setNewName(event.target.value)}/>
                         <div className="flex">

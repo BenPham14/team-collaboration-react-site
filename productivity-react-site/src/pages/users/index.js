@@ -32,6 +32,7 @@ const Users = () => {
             <main>
                 <Topbar />
                 <section>
+                    <p>{currentTeam}</p>
                     {
                         members.map((member) => (
                             member.memberDetails.map((details) => 
@@ -42,6 +43,7 @@ const Users = () => {
                             )
                         ))
                     }
+                    <button>+ Add Member</button>
                 </section>
             </main>
         </>
