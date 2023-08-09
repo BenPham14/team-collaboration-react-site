@@ -11,13 +11,14 @@ import { AppContext } from "../../context/AppContext";
 const Chat = () => {
     const [newMessage, setNewMessage] = useState("");
     const messagesRef = collection(db, "messages"); // get data from firebase collection
-    const { currentTeam } = useContext(AppContext);
+    const { currentTeam, currentTeamUID } = useContext(AppContext);
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         const queryMessages = query( // get messages where team == team
             messagesRef, 
-            where("team", "==", currentTeam),
+            // where("team", "==", currentTeam),
+            where("teamUID", "==", currentTeamUID),
             orderBy("createdAt")
         );
         const unsubscribe = onSnapshot(queryMessages, (snapshot) => { // listens for changes in db query
@@ -29,7 +30,7 @@ const Chat = () => {
         });
 
         return () => unsubscribe(); // cleanup useEffect to end functions that subscribe to listening services like onSnapshot
-    }, [currentTeam]);
+    }, [currentTeamUID]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -40,6 +41,7 @@ const Chat = () => {
             text: newMessage, // data that you want to add
             createdAt: serverTimestamp(),
             team: currentTeam,
+            teamUID: currentTeamUID,
             uid: auth.currentUser.uid,
             user: auth.currentUser.displayName,
             image: auth.currentUser.photoURL

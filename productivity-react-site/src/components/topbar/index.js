@@ -14,7 +14,7 @@ const Topbar = () => {
     const [profile, setProfile] = useState("");
     const [createOpen, setCreateOpen] = useState(false);
     const [newName, setNewName] = useState("");
-    const { links, currentTeam, setCurrentTeam } = useContext(AppContext);
+    const { links, currentTeam, setCurrentTeam, setCurrentTeamUID } = useContext(AppContext);
     const teamsRef = collection(db, "teams");
 
     useEffect(() => {
@@ -35,6 +35,7 @@ const Topbar = () => {
 
                     if (currentTeam === "" && teams[0]) {
                         setCurrentTeam(teams[0].name);
+                        setCurrentTeamUID(teams[0].id);
                     } else if (currentTeam === "" && !teams[0]){
                         setCreateOpen(true);
                     };
@@ -69,6 +70,11 @@ const Topbar = () => {
         setCreateOpen(!createOpen);
     };
 
+    const handleSelect = (name, id) => {
+        setCurrentTeam(name);
+        setCurrentTeamUID(id);
+    };
+
     return (
         <div className={`${topbar.topbar} blk-shadow flex`}>
             <h3>{currentPage}</h3>
@@ -86,7 +92,7 @@ const Topbar = () => {
                             <button onClick={() => setCreateOpen(!createOpen)}>+ Create Team</button>
                             {
                                 teams.map((team) => (
-                                    <button key={team.id} onClick={() => setCurrentTeam(team.name)}>{team.name}</button>
+                                    <button key={team.id} onClick={() => handleSelect(team.name, team.id)}>{team.name}</button>
                                 ))
                             }
                             
