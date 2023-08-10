@@ -16,8 +16,7 @@ const Chat = () => {
 
     useEffect(() => {
         const queryMessages = query( // get messages where team == team
-            messagesRef, 
-            // where("team", "==", currentTeam),
+            messagesRef,
             where("teamUID", "==", currentTeamUID),
             orderBy("createdAt")
         );

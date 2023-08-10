@@ -8,12 +8,12 @@ import Topbar from "../../components/topbar";
 const Users = () => {
     const teamsRef = collection(db, "teams");
     const [members, setMembers] = useState([]);
-    const { currentTeam } = useContext(AppContext);
+    const { currentTeam, currentTeamUID } = useContext(AppContext);
     
     useEffect(() => {
         const queryTeams = query(
             teamsRef,
-            where("name", "==", currentTeam)
+            where("uid", "==", currentTeamUID)
         );
         const unsubscribe = onSnapshot(queryTeams, (snapshot) => {
             let members = [];
@@ -22,9 +22,8 @@ const Users = () => {
             });
             setMembers(members);
         });
-
         return () => unsubscribe();
-    }, [currentTeam]);
+    }, [currentTeamUID]);
 
     return (
         <>

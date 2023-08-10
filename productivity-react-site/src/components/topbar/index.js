@@ -6,6 +6,8 @@ import { AppContext } from "../../context/AppContext";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, onSnapshot, query, serverTimestamp, where } from 'firebase/firestore';
+import {v4 as uuidv4} from 'uuid';
+uuidv4();
 
 const Topbar = () => {
     const [teamSelect, setTeamSelect] = useState(false);
@@ -35,7 +37,7 @@ const Topbar = () => {
 
                     if (currentTeam === "" && teams[0]) {
                         setCurrentTeam(teams[0].name);
-                        setCurrentTeamUID(teams[0].id);
+                        setCurrentTeamUID(teams[0].uid);
                     } else if (currentTeam === "" && !teams[0]){
                         setCreateOpen(true);
                     };
@@ -57,6 +59,7 @@ const Topbar = () => {
             return
         };
         await addDoc(teamsRef, {
+            uid: uuidv4(),
             name: newName,
             createdAt: serverTimestamp(),
             members: [auth.currentUser.uid],
@@ -92,7 +95,7 @@ const Topbar = () => {
                             <button onClick={() => setCreateOpen(!createOpen)}>+ Create Team</button>
                             {
                                 teams.map((team) => (
-                                    <button key={team.id} onClick={() => handleSelect(team.name, team.id)}>{team.name}</button>
+                                    <button key={team.id} onClick={() => handleSelect(team.name, team.uid)}>{team.name}</button>
                                 ))
                             }
                             
