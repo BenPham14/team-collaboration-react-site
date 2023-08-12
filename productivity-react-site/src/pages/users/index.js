@@ -5,6 +5,7 @@ import { auth, db } from '../../config/firebase';
 import { AppContext } from "../../context/AppContext";
 import Topbar from "../../components/topbar";
 import {v4 as uuidv4} from 'uuid';
+import users from './Users.module.css';
 
 const Users = () => {
     const teamsRef = collection(db, "teams");
@@ -50,21 +51,25 @@ const Users = () => {
     return (
         <>
             <Sidebar/>
-            <main>
+            <main className={users.users}>
                 <Topbar />
                 <section>
-                    <p>{currentTeam}</p>
-                    {
-                        teams.map((team) => (
-                            Object.keys(team.members).map((keyName, id) => (
-                                <div key={id}>
-                                    <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
-                                    <p>{team.members[keyName].name}</p>
-                                </div>
+                    <div className={`${users.list} grid`}>
+                        <div className={`${users.header} flex`}>
+                            <h3>{currentTeam}</h3>
+                            <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite Users</button>
+                        </div>
+                        {
+                            teams.map((team) => (
+                                Object.keys(team.members).map((keyName, id) => (
+                                    <div key={id} className={`${users.user} flex`}>
+                                        <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
+                                        <p>{team.members[keyName].name}</p>
+                                    </div>
+                                ))
                             ))
-                        ))
-                    }
-                    <button onClick={() => setInviteOpen(true)}>+ Invite Users</button>
+                        }
+                    </div>
                     <dialog open={inviteOpen}>
                         <form onSubmit={handleSend}>
                             <input type="email" value={newName} placeholder="Enter Email" onChange={(event) => setNewName(event.target.value)} required/>

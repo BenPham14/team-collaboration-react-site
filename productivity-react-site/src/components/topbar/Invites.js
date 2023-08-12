@@ -30,7 +30,7 @@ const Invites = () => {
     }, []);
 
     const handleClick = async (teamDoc) => {
-        const teamRef = doc(db, "teams", teamDoc); // change this to invite.teamDoc
+        const teamRef = doc(db, "teams", teamDoc);
 
         await updateDoc(teamRef, {
             [`members.${auth.currentUser.uid}`] : {
