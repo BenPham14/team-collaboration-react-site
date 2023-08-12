@@ -68,7 +68,7 @@ const Chat = () => {
                         <form className="flex" onSubmit={handleSubmit}>
                             <input 
                                 type="text" 
-                                placeholder="Message"
+                                placeholder="Type message"
                                 value={newMessage}
                                 onChange={(event) => setNewMessage(event.target.value)}
                             />

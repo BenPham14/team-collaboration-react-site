@@ -5,7 +5,6 @@ import tasks from "./Tasks.module.css";
 import TaskItem from "./TaskItem";
 import TaskDetails from "./TaskDetails";
 import {v4 as uuidv4} from 'uuid';
-uuidv4();
 
 const Tasks = () => {
     const [newItem, setNewItem] = useState("");
@@ -59,7 +58,7 @@ const Tasks = () => {
                             <input 
                                 type="text" 
                                 value={newItem} 
-                                placeholder="+ Press Enter to add task..." 
+                                placeholder="+ Press Enter to add task" 
                                 onChange={(event) => setNewItem(event.target.value)}
                             />
                             <input 

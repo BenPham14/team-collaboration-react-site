@@ -1,21 +1,18 @@
 import topbar from "./Topbar.module.css";
-import { RiUser3Line, RiNotification3Line } from "react-icons/ri";
-import { GoChevronDown, GoChevronUp } from "react-icons/go"
+import { RiUser3Line } from "react-icons/ri";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
-import {v4 as uuidv4} from 'uuid';
-uuidv4();
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import TeamSelect from "./TeamSelect";
+import Invites from "./Invites";
 
 const Topbar = () => {
-    const [teamSelect, setTeamSelect] = useState(false);
     const [teams, setTeams] = useState([]);
     const [currentPage, setCurrentPage] = useState("Home");
     const [profile, setProfile] = useState("");
     const [createOpen, setCreateOpen] = useState(false);
-    const [newName, setNewName] = useState("");
     const { links, currentTeam, setCurrentTeam, setCurrentTeamUID } = useContext(AppContext);
     const teamsRef = collection(db, "teams");
 
@@ -53,65 +50,17 @@ const Topbar = () => {
         ));
     }, [window.location.hash]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (newName === "") {
-            return
-        };
-        await addDoc(teamsRef, {
-            uid: uuidv4(),
-            name: newName,
-            createdAt: serverTimestamp(),
-            members: {
-                [auth.currentUser.uid]: {
-                    name: auth.currentUser.displayName, 
-                    image: auth.currentUser.photoURL
-                }
-            }
-        });
-        setNewName("");
-        setCreateOpen(!createOpen);
-    };
-
-    const handleSelect = (name, id) => {
-        setCurrentTeam(name);
-        setCurrentTeamUID(id);
-    };
-
     return (
         <div className={`${topbar.topbar} blk-shadow flex`}>
             <h3>{currentPage}</h3>
             <div className={`${topbar.icons} flex`}>
-                <div className={`${topbar.team} flex ${teamSelect && topbar.active}`} onClick={() => setTeamSelect(!teamSelect)}>
-                    <p>{currentTeam}</p>
-                    {
-                        teamSelect ? 
-                            <GoChevronUp className={topbar.icon}/> :
-                            <GoChevronDown className={topbar.icon}/>
-                    }
-                    {
-                        teamSelect &&
-                        <div className={`${topbar.dropDown} flex column`}>
-                            <button onClick={() => setCreateOpen(!createOpen)}>+ Create Team</button>
-                            {
-                                teams.map((team) => (
-                                    <button key={team.id} onClick={() => handleSelect(team.name, team.uid)}>{team.name}</button>
-                                ))
-                            }
-                            
-                        </div>
-                    }
-                </div>
-                <dialog className={`${topbar.create} blk-shadow`} open={createOpen}>
-                    <form className="flex column" onSubmit={handleSubmit}>
-                        <input type="text" value={newName} onChange={(event) => setNewName(event.target.value)}/>
-                        <div className="flex">
-                            <button type="submit">Create</button>
-                            <button type="button" onClick={() => setCreateOpen(!createOpen)}>Cancel</button>
-                        </div>
-                    </form>
-                </dialog>
-                <RiNotification3Line/>
+                <TeamSelect
+                    createOpen={createOpen}
+                    setCreateOpen={setCreateOpen}
+                    teams={teams}
+                    teamsRef={teamsRef}
+                />
+                <Invites/>
                 {
                     profile ? 
                         <img src={profile.photoURL} alt=""/> :

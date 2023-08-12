@@ -1,13 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import Sidebar from "../../components/sidebar";
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { db } from '../../config/firebase';
+import { collection, onSnapshot, query, where, addDoc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from '../../config/firebase';
 import { AppContext } from "../../context/AppContext";
 import Topbar from "../../components/topbar";
+import {v4 as uuidv4} from 'uuid';
 
 const Users = () => {
     const teamsRef = collection(db, "teams");
+    const invitesRef = collection(db, "invites");
     const [teams, setTeams] = useState([]);
+    const [inviteOpen, setInviteOpen] = useState(false);
+    const [newName, setNewName] = useState("");
     const { currentTeam, currentTeamUID } = useContext(AppContext);
     
     useEffect(() => {
@@ -24,6 +28,23 @@ const Users = () => {
         });
         return () => unsubscribe();
     }, [currentTeamUID]);
+
+    const handleSend = async (event) => {
+        event.preventDefault();
+        if (newName === "") {
+            return
+        };
+        await addDoc(invitesRef, {
+            createdAt: serverTimestamp(),
+            uid: uuidv4(),
+            invitee: newName,
+            inviter: auth.currentUser.displayName,
+            team: currentTeam,
+            teamUID: currentTeamUID
+        });
+        setNewName("");
+        setInviteOpen(false);
+    };
 
     return (
         <>
@@ -42,7 +63,14 @@ const Users = () => {
                             ))
                         ))
                     }
-                    <button>+ Invite Users</button>
+                    <button onClick={() => setInviteOpen(true)}>+ Invite Users</button>
+                    <dialog open={inviteOpen}>
+                        <form onSubmit={handleSend}>
+                            <input type="email" value={newName} placeholder="Enter Email" onChange={(event) => setNewName(event.target.value)} required/>
+                            <button type="submit">Create</button>
+                            <button type="button" onClick={() => {setInviteOpen(!inviteOpen); setNewName("")}}>Cancel</button>
+                        </form>
+                    </dialog>
                 </section>
             </main>
         </>
