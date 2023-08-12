@@ -9,7 +9,6 @@ const Invites = () => {
     const [invites, setInvites] = useState([]);
     const [invitesOpen, setInvitesOpen] = useState(false);
     const invitesRef = collection(db, "invites");
-    const teamRef = doc(db, "teams", "VG7LzPNEmFK14zSF09uM");
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -30,11 +29,13 @@ const Invites = () => {
         });
     }, []);
 
-    const handleClick = async () => {
+    const handleClick = async (teamDoc) => {
+        const teamRef = doc(db, "teams", teamDoc); // change this to invite.teamDoc
+
         await updateDoc(teamRef, {
-            [`members.${"uid2"}`] : {
-                "name" : "",
-                "image" : ""
+            [`members.${auth.currentUser.uid}`] : {
+                "name" : auth.currentUser.displayName,
+                "image" : auth.currentUser.photoURL
             }
         });
     };
@@ -48,7 +49,7 @@ const Invites = () => {
                     invites.map((invite) => (
                         <form key={invite.uid}>
                             <p>{invite.inviter} invited you to join their team - {invite.team}</p>
-                            <button onClick={handleClick}>Accept</button>
+                            <button onClick={() => handleClick(invite.teamDoc)}>Accept</button>
                             <button>Decline</button>
                         </form>
                     ))

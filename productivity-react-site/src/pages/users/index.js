@@ -12,7 +12,7 @@ const Users = () => {
     const [teams, setTeams] = useState([]);
     const [inviteOpen, setInviteOpen] = useState(false);
     const [newName, setNewName] = useState("");
-    const { currentTeam, currentTeamUID } = useContext(AppContext);
+    const { currentTeam, currentTeamUID, currentTeamDoc } = useContext(AppContext);
     
     useEffect(() => {
         const queryTeams = query(
@@ -40,7 +40,8 @@ const Users = () => {
             invitee: newName,
             inviter: auth.currentUser.displayName,
             team: currentTeam,
-            teamUID: currentTeamUID
+            teamUID: currentTeamUID,
+            teamDoc: currentTeamDoc
         });
         setNewName("");
         setInviteOpen(false);

@@ -13,7 +13,7 @@ const Topbar = () => {
     const [currentPage, setCurrentPage] = useState("Home");
     const [profile, setProfile] = useState("");
     const [createOpen, setCreateOpen] = useState(false);
-    const { links, currentTeam, setCurrentTeam, setCurrentTeamUID } = useContext(AppContext);
+    const { links, currentTeam, setCurrentTeam, setCurrentTeamUID, setCurrentTeamDoc } = useContext(AppContext);
     const teamsRef = collection(db, "teams");
 
     useEffect(() => {
@@ -35,6 +35,7 @@ const Topbar = () => {
                     if (currentTeam === "" && teams[0]) {
                         setCurrentTeam(teams[0].name);
                         setCurrentTeamUID(teams[0].uid);
+                        setCurrentTeamDoc(teams[0].id);
                     } else if (currentTeam === "" && !teams[0]){
                         setCreateOpen(true);
                     };
