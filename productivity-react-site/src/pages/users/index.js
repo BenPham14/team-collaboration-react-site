@@ -7,7 +7,7 @@ import Topbar from "../../components/topbar";
 
 const Users = () => {
     const teamsRef = collection(db, "teams");
-    const [members, setMembers] = useState([]);
+    const [teams, setTeams] = useState([]);
     const { currentTeam, currentTeamUID } = useContext(AppContext);
     
     useEffect(() => {
@@ -16,11 +16,11 @@ const Users = () => {
             where("uid", "==", currentTeamUID)
         );
         const unsubscribe = onSnapshot(queryTeams, (snapshot) => {
-            let members = [];
+            let teams = [];
             snapshot.forEach((doc) => {
-                members.push({...doc.data(), id: doc.id});
+                teams.push({...doc.data(), id: doc.id});
             });
-            setMembers(members);
+            setTeams(teams);
         });
         return () => unsubscribe();
     }, [currentTeamUID]);
@@ -33,16 +33,16 @@ const Users = () => {
                 <section>
                     <p>{currentTeam}</p>
                     {
-                        members.map((member) => (
-                            member.memberDetails.map((details) => 
-                                <div key={details.uid}>
-                                    <img src={details.image} alt={details.name}/>
-                                    <p>{details.name}</p>
+                        teams.map((team) => (
+                            Object.keys(team.members).map((keyName, id) => (
+                                <div key={id}>
+                                    <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
+                                    <p>{team.members[keyName].name}</p>
                                 </div>
-                            )
+                            ))
                         ))
                     }
-                    <button>+ Add Member</button>
+                    <button>+ Invite Users</button>
                 </section>
             </main>
         </>

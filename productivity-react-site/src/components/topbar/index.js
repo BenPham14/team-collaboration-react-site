@@ -1,11 +1,11 @@
 import topbar from "./Topbar.module.css";
-import { RiUser3Line } from "react-icons/ri";
+import { RiUser3Line, RiNotification3Line } from "react-icons/ri";
 import { GoChevronDown, GoChevronUp } from "react-icons/go"
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, onSnapshot, query, serverTimestamp, where } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import {v4 as uuidv4} from 'uuid';
 uuidv4();
 
@@ -26,7 +26,7 @@ const Topbar = () => {
 
                 const queryTeams = query(
                     teamsRef,
-                    where("members", "array-contains", user.uid)
+                    orderBy('members.' + user.uid)
                 );
                 const unsubscribe = onSnapshot(queryTeams, (snapshot) => {
                     let teams = [];
@@ -62,12 +62,12 @@ const Topbar = () => {
             uid: uuidv4(),
             name: newName,
             createdAt: serverTimestamp(),
-            members: [auth.currentUser.uid],
-            memberDetails: [{
-                uid: auth.currentUser.uid,
-                name: auth.currentUser.displayName, 
-                image: auth.currentUser.photoURL
-            }]
+            members: {
+                [auth.currentUser.uid]: {
+                    name: auth.currentUser.displayName, 
+                    image: auth.currentUser.photoURL
+                }
+            }
         });
         setNewName("");
         setCreateOpen(!createOpen);
@@ -111,7 +111,7 @@ const Topbar = () => {
                         </div>
                     </form>
                 </dialog>
-                
+                <RiNotification3Line/>
                 {
                     profile ? 
                         <img src={profile.photoURL} alt=""/> :
