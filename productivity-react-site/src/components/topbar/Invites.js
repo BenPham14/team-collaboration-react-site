@@ -1,13 +1,15 @@
-import { RiNotification3Line } from "react-icons/ri";
+import { RiNotification3Line, RiCloseCircleLine } from "react-icons/ri";
 import topbar from "./Topbar.module.css";
 import { useEffect, useState } from "react";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import { collection, doc, onSnapshot, orderBy, query, updateDoc, where } from 'firebase/firestore';
 
 const Invites = () => {
     const [invites, setInvites] = useState([]);
+    const [invitesOpen, setInvitesOpen] = useState(false);
     const invitesRef = collection(db, "invites");
+    const teamRef = doc(db, "teams", "VG7LzPNEmFK14zSF09uM");
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -28,15 +30,25 @@ const Invites = () => {
         });
     }, []);
 
+    const handleClick = async () => {
+        await updateDoc(teamRef, {
+            [`members.${"uid2"}`] : {
+                "name" : "",
+                "image" : ""
+            }
+        });
+    };
+
     return (
         <>
-            <RiNotification3Line/>
-            <dialog className="blk-shadow" open>
+            <RiNotification3Line onClick={() => setInvitesOpen(true)}/>
+            <dialog className={`${topbar.invites} blk-shadow`} open={invitesOpen}>
+                <RiCloseCircleLine onClick={() => setInvitesOpen(false)}/>
                 {
                     invites.map((invite) => (
-                        <form>
+                        <form key={invite.uid}>
                             <p>{invite.inviter} invited you to join their team - {invite.team}</p>
-                            <button>Accept</button>
+                            <button onClick={handleClick}>Accept</button>
                             <button>Decline</button>
                         </form>
                     ))

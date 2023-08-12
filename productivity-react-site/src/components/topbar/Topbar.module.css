@@ -78,8 +78,10 @@
     cursor: pointer;
 }
 
-.create {
+.create,
+.invites {
     top: 40vh;
+    cursor: default;
 }
 
 .create form {
@@ -88,4 +90,12 @@
 
 .create button {
     width: 100%;
+}
+
+.invites p {
+    margin: 0;
+}
+
+.invites button {
+    cursor: pointer;
 }
