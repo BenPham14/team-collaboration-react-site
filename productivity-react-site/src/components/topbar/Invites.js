@@ -3,7 +3,7 @@ import topbar from "./Topbar.module.css";
 import { useEffect, useState } from "react";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, onSnapshot, orderBy, query, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, onSnapshot, query, updateDoc, where, deleteDoc } from 'firebase/firestore';
 
 const Invites = () => {
     const [invites, setInvites] = useState([]);
@@ -29,15 +29,25 @@ const Invites = () => {
         });
     }, []);
 
-    const handleClick = async (teamDoc) => {
+    const handleAccept = async (teamDoc, inviteDoc) => {
         const teamRef = doc(db, "teams", teamDoc);
+        const inviteRef = doc(db, "invites", inviteDoc);
 
+        // add user ID to members object
         await updateDoc(teamRef, {
             [`members.${auth.currentUser.uid}`] : {
                 "name" : auth.currentUser.displayName,
                 "image" : auth.currentUser.photoURL
             }
         });
+
+        // delete invite from invites db
+        await deleteDoc(inviteRef);
+    };
+
+    const handleDecline = async (inviteDoc) => {
+        const inviteRef = doc(db, "invites", inviteDoc);
+        await deleteDoc(inviteRef);
     };
 
     return (
@@ -49,8 +59,8 @@ const Invites = () => {
                     invites.map((invite) => (
                         <form key={invite.uid}>
                             <p>{invite.inviter} invited you to join their team - {invite.team}</p>
-                            <button onClick={() => handleClick(invite.teamDoc)}>Accept</button>
-                            <button>Decline</button>
+                            <button onClick={() => handleAccept(invite.teamDoc, invite.id)}>Accept</button>
+                            <button onClick={() => handleDecline(invite.id)}>Decline</button>
                         </form>
                     ))
                 }
