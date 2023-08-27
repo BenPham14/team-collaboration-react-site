@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar";
 import Topbar from "../../components/topbar";
 import tasks from "./Tasks.module.css";
 import TaskItem from "./TaskItem";
 import TaskDetails from "./TaskDetails";
+import { query, collection, where, orderBy, onSnapshot, addDoc, doc, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from '../../config/firebase';
 import {v4 as uuidv4} from 'uuid';
+import { AppContext } from "../../context/AppContext";
 
 const Tasks = () => {
     const [newItem, setNewItem] = useState("");
@@ -12,25 +15,48 @@ const Tasks = () => {
     const [tasksList, setTaskList] = useState([]);
     const [selectedTask, setSelectedTask] = useState({});
     const [isShowing, setIsShowing] = useState(false);
+    const tasksRef = collection(db, "tasks");
+    const { currentTeamUID } = useContext(AppContext);
 
-    const addTask = (text, date) => {
-        if (!text) {
+    useEffect(() => {
+        const queryTasks = query(
+            tasksRef,
+            where("teamUID", "==", currentTeamUID)
+            // orderBy("createdAt")
+        );
+        const unsubscribe = onSnapshot(queryTasks, (snapshot) => {
+            let tasks = [];
+            snapshot.forEach((doc) => {
+                tasks.push({...doc.data(), id: doc.id});
+            });
+            setTaskList(tasks);
+        });
+
+        return () => unsubscribe();
+    }, [currentTeamUID]);
+
+    const addTask = async (text, date) => {
+        if (text === "") {
             return
         };
-        let item = {
-            id: uuidv4(),
+        await addDoc(tasksRef, {
+            uid: uuidv4(),
             label: text,
-            date: date
-        };
-        setTaskList([...tasksList, item]);
+            date: date,
+            assignedTo: "",
+            teamUID: currentTeamUID,
+            createdAt: serverTimestamp(),
+            createdBy: auth.currentUser.displayName,
+            createdByUID: auth.currentUser.uid
+        });
         setNewItem("");
         setNewDate("");
     }
 
-    const deleteTask = (item) => {
-        let list = tasksList.filter((task) => task.id != item);
-        setTimeout(() => {
-            setTaskList(list);
+    const deleteTask = (taskDoc) => {
+        const taskRef = doc(db, "tasks", taskDoc);
+        setTimeout(async () => {
+            await deleteDoc(taskRef);
         }, 200);
     }
 
