@@ -12,6 +12,6 @@ const TaskItem = ({task, deleteTask, setSelectedTask, setIsShowing}) => {
             </button>
         </>
     );
-}
+};
 
 export default TaskItem;

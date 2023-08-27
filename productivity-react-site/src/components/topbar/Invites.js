@@ -67,6 +67,6 @@ const Invites = () => {
             </dialog>
         </>
     );
-}
+};
 
 export default Invites;

@@ -19,7 +19,7 @@ const Sidebar = () => {
                 }
             </aside>
         );
-    }
+    };
 
     return (
         <aside className={`${sidebar.aside} flex column blk-shadow`}>
@@ -36,6 +36,6 @@ const Sidebar = () => {
             <h6>Benjamin Pham &copy; 2023</h6>
         </aside>
     );
-}
+};
 
 export default Sidebar;

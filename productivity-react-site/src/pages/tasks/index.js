@@ -51,14 +51,14 @@ const Tasks = () => {
         });
         setNewItem("");
         setNewDate("");
-    }
+    };
 
     const deleteTask = (taskDoc) => {
         const taskRef = doc(db, "tasks", taskDoc);
         setTimeout(async () => {
             await deleteDoc(taskRef);
         }, 200);
-    }
+    };
 
     const editTask = async (label, date, taskDoc) => {
         const taskRef = doc(db, "tasks", taskDoc);
@@ -66,14 +66,14 @@ const Tasks = () => {
             label: label,
             date: date
         });
-    }
+    };
 
     const handleEnter = (event) => {
         if(event.key === 'Enter') { 
             addTask(newItem, newDate);
             event.preventDefault();
         };
-    }
+    };
 
     return (
         <>
@@ -109,6 +109,7 @@ const Tasks = () => {
                     </section>
                     <TaskDetails 
                         selectedTask={selectedTask}
+                        setSelectedTask={setSelectedTask}
                         editTask={editTask}
                         isShowing={isShowing}
                         setIsShowing={setIsShowing}
@@ -117,6 +118,6 @@ const Tasks = () => {
             </main>
         </>
     );
-}
+};
 
 export default Tasks;

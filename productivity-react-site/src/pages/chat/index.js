@@ -79,6 +79,6 @@ const Chat = () => {
             </main>
         </>
     );
-}
+};
 
 export default Chat;

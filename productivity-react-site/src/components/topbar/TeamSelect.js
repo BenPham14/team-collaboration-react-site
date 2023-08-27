@@ -70,6 +70,6 @@ const TeamSelect = ({createOpen, setCreateOpen, teams, teamsRef }) => {
             </dialog>
         </>
     );
-}
+};
 
 export default TeamSelect;

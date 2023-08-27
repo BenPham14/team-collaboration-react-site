@@ -32,6 +32,6 @@ const AppContextProvider = (props) => {
     const contextValue = { links, screenWidth, currentTeam, setCurrentTeam, currentTeamUID, setCurrentTeamUID, currentTeamDoc, setCurrentTeamDoc };
 
     return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>
-}
+};
 
 export { AppContext, AppContextProvider };

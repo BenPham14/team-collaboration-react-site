@@ -3,26 +3,30 @@ import tasks from "./Tasks.module.css";
 import { AppContext } from "../../context/AppContext";
 import { RiArrowLeftLine } from "react-icons/ri";
 
-const TaskDetails = ({selectedTask, editTask, isShowing, setIsShowing}) => {
+const TaskDetails = ({selectedTask, setSelectedTask, editTask, isShowing, setIsShowing}) => {
     const [newTask, setNewTask] = useState("");
     const [newDate, setNewDate] = useState("");
     const [button, setButton] = useState(false);
-    const { screenWidth } = useContext(AppContext);
+    const { screenWidth, currentTeam } = useContext(AppContext);
 
     useEffect(() => {
         setNewTask(selectedTask.label);
         setNewDate(selectedTask.date);
-        setButton(false)
-    }, [selectedTask.label])
+        setButton(false);
+    }, [selectedTask.label]);
+
+    useEffect(() => {
+        setSelectedTask({});
+    },[currentTeam]);
 
     const handleSubmit = () => {
         editTask(newTask, newDate, selectedTask.id);
         setButton(false);
-    }
+    };
 
     if (selectedTask.label == null) {
         return <section className={`${tasks.details} flex column`}></section>
-    }
+    };
 
     return (
         <section 
@@ -53,6 +57,6 @@ const TaskDetails = ({selectedTask, editTask, isShowing, setIsShowing}) => {
             />
         </section>
     );
-}
+};
 
 export default TaskDetails;
