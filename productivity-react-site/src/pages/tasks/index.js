@@ -4,7 +4,7 @@ import Topbar from "../../components/topbar";
 import tasks from "./Tasks.module.css";
 import TaskItem from "./TaskItem";
 import TaskDetails from "./TaskDetails";
-import { query, collection, where, orderBy, onSnapshot, addDoc, doc, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { query, collection, where, orderBy, onSnapshot, addDoc, doc, deleteDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
 import {v4 as uuidv4} from 'uuid';
 import { AppContext } from "../../context/AppContext";
@@ -21,8 +21,8 @@ const Tasks = () => {
     useEffect(() => {
         const queryTasks = query(
             tasksRef,
-            where("teamUID", "==", currentTeamUID)
-            // orderBy("createdAt")
+            where("teamUID", "==", currentTeamUID),
+            orderBy("createdAt")
         );
         const unsubscribe = onSnapshot(queryTasks, (snapshot) => {
             let tasks = [];
@@ -60,10 +60,12 @@ const Tasks = () => {
         }, 200);
     }
 
-    const editTask = (label, date, id) => {
-        setTaskList(tasksList.map(task => task.id === id ? 
-            {...task,  label: label, date: date} : task
-        ))
+    const editTask = async (label, date, taskDoc) => {
+        const taskRef = doc(db, "tasks", taskDoc);
+        await updateDoc(taskRef, {
+            label: label,
+            date: date
+        });
     }
 
     const handleEnter = (event) => {
