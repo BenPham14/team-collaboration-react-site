@@ -8,6 +8,7 @@ import Tasks from './pages/tasks';
 import Chat from './pages/chat';
 import Users from './pages/users';
 import Cookies from 'universal-cookie';
+import Files from './pages/files';
 
 const cookies = new Cookies();
 
@@ -25,8 +26,9 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route path='/tasks' element={<Tasks/>}/>
           <Route path='/chat' element={<Chat/>}/>
+          <Route path='/tasks' element={<Tasks/>}/>
+          <Route path='/files' element={<Files/>}/>
           <Route path='/users' element={<Users/>}/>
         </Routes>
       </HashRouter>

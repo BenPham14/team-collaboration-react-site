@@ -33,7 +33,7 @@ const Sidebar = () => {
                 ))
             }
 
-            <h6>Benjamin Pham &copy; 2023</h6>
+            <h6>Ben Pham &copy; 2023</h6>
         </aside>
     );
 };

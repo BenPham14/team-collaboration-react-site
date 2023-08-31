@@ -25,7 +25,7 @@ const AppContextProvider = (props) => {
         {label: 'Chat', icon: <RiChat4Line/>, path: '/chat'},
         {label: 'Tasks', icon: <RiDraftLine />, path: '/tasks'},
         // {label: 'Meetings', icon: <RiLiveLine />, path: '/meetings'},
-        {label: 'Documents', icon: <RiFolder2Line />, path: '/documents'},
+        {label: 'Files', icon: <RiFolder2Line />, path: '/files'},
         {label: 'Users', icon: <RiGroupLine />, path: '/users'}
     ];
 

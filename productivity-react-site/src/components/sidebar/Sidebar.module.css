@@ -41,7 +41,6 @@
     margin: 0;
     margin-left: 10px;
     padding: 0;
-    bottom: 20px;
 }
 
 .aside h6:hover,
@@ -52,5 +51,6 @@
 @media only screen and (min-height: 380px) {
     .aside h6 {
         position: absolute;
+        bottom: 20px;
     }
 }
