@@ -57,7 +57,7 @@ const Users = () => {
                     <div className={`${users.list} grid`}>
                         <div className={`${users.header} flex`}>
                             <h3>{currentTeam}</h3>
-                            <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite Users</button>
+                            <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite User</button>
                         </div>
                         {
                             teams.map((team) => (

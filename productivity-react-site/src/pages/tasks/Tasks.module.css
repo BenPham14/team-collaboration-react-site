@@ -73,6 +73,10 @@
     border-bottom: 1px solid whitesmoke;
 }
 
+.item:last-of-type {
+    border-bottom: none;
+}
+
 .item:hover {
     border-radius: 5px;
 }
@@ -160,7 +164,7 @@
     .list {
         position: absolute;
         right: 20px;
-        left: 209px;
+        left: 164px;
     }
 }
 
