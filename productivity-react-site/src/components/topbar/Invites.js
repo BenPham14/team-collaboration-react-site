@@ -52,7 +52,7 @@ const Invites = () => {
 
     return (
         <>
-            <RiNotification3Line onClick={() => setInvitesOpen(true)}/>
+            <RiNotification3Line title='Invites' onClick={() => setInvitesOpen(true)}/>
             <dialog className={`${topbar.invites} blk-shadow`} open={invitesOpen}>
                 <RiCloseCircleLine onClick={() => setInvitesOpen(false)}/>
                 {

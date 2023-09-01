@@ -33,11 +33,23 @@
     gap: 5px;
 }
 
+.team,
+.dropDown {
+    width: 100px;
+}
+
 .team {
     position: relative;
     background-color: whitesmoke;
+    justify-content: space-between;
     border-radius: 5px;
     z-index: 1;
+}
+
+.team p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .team p,

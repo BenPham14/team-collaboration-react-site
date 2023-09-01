@@ -40,7 +40,7 @@ const TeamSelect = ({createOpen, setCreateOpen, teams, teamsRef }) => {
     return (
         <>
             <div className={`${topbar.team} flex ${teamSelect && topbar.active}`} onClick={() => setTeamSelect(!teamSelect)}>
-                <p>{currentTeam}</p>
+                <p title={currentTeam}>{currentTeam}</p>
                 {
                     teamSelect ? 
                         <GoChevronUp className={topbar.icon}/> :

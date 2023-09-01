@@ -64,8 +64,8 @@ const Topbar = () => {
                 <Invites/>
                 {
                     profile ? 
-                        <img src={profile.photoURL} alt=""/> :
-                        <RiUser3Line className="placeholder"/>
+                        <img title='Profile' src={profile.photoURL} alt=""/> :
+                        <RiUser3Line title='Profile' className="placeholder"/>
                 }
             </div>
         </div>
