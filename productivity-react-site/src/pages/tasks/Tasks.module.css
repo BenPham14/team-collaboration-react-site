@@ -14,18 +14,6 @@
     margin: 0;
 }
 
-.list div p:first-child {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    margin-right: 20px;
-}
-
-.list div p:last-child {
-    white-space: nowrap;
-    text-align: end;
-}
-
 .list form {
     margin-bottom: 10px;
     gap: 10px;
@@ -73,24 +61,36 @@
     border-bottom: 1px solid whitesmoke;
 }
 
+.item div {
+    grid-template-columns: 1fr auto;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.item p:first-child {
+    font-size: 0.875rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.item p:last-child {
+    white-space: nowrap;
+    text-align: end;
+    font-size: 0.6875rem;
+}
+
 .item:last-of-type {
     border-bottom: none;
 }
 
 .item:hover {
     border-radius: 5px;
-}
-
-.item div {
-    width: 90%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0px;
-    cursor: pointer;
-}
-
-.item div > *:last-child {
-    font-size: 0.6875rem;
 }
 
 .details {
