@@ -37,7 +37,9 @@ const Invites = () => {
         await updateDoc(teamRef, {
             [`members.${auth.currentUser.uid}`] : {
                 "name" : auth.currentUser.displayName,
-                "image" : auth.currentUser.photoURL
+                "image" : auth.currentUser.photoURL,
+                "email": auth.currentUser.email,
+                "role": "User"
             }
         });
 

@@ -59,16 +59,32 @@ const Users = () => {
                             <h3>{currentTeam}</h3>
                             <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite User</button>
                         </div>
-                        {
-                            teams.map((team) => (
-                                Object.keys(team.members).map((keyName, id) => (
-                                    <div key={id} className={`${users.user} flex`}>
-                                        <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
-                                        <p>{team.members[keyName].name}</p>
-                                    </div>
-                                ))
-                            ))
-                        }
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    teams.map((team) => (
+                                        Object.keys(team.members).map((keyName, id) => (
+                                            <tr key={id} className={users.user}>
+                                                <td className="flex">
+                                                    <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
+                                                </td>
+                                                <td>{team.members[keyName].name}</td>
+                                                <td>{team.members[keyName].email}</td>
+                                                <td>{team.members[keyName].role}</td>
+                                            </tr>
+                                        ))
+                                    ))
+                                }
+                            </tbody>
+                        </table>
                     </div>
                     <dialog open={inviteOpen}>
                         <form onSubmit={handleSend}>

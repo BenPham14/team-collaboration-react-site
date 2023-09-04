@@ -25,7 +25,10 @@
     gap: 20px;
 }
 
-.icons > * {
+.icons > *,
+.invites button,
+.create button,
+.dropDown button {
     cursor: pointer;
 }
 
@@ -54,7 +57,7 @@
 
 .team p,
 .dropDown > * {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
 }
 
 .team > * {
@@ -78,7 +81,8 @@
     padding: 10px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    top: 27px;
+    top: 26px;
+    cursor: default;
 }
 
 .dropDown button {
@@ -87,7 +91,7 @@
     border: none;
     width: 100%;
     color: gray;
-    cursor: pointer;
+    padding: 5px;
 }
 
 .create,
@@ -106,8 +110,4 @@
 
 .invites p {
     margin: 0;
-}
-
-.invites button {
-    cursor: pointer;
 }

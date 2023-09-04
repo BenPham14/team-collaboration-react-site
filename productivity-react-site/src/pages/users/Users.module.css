@@ -1,3 +1,17 @@
+.header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header button {
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(to bottom right, rgb(135, 170, 253), rgb(155, 184, 253));
+    box-shadow: 0 0 5px 1px rgba(135, 170, 253, 0.3);
+}
+
 .users p,
 .users h3 {
     margin: 0;
@@ -16,29 +30,45 @@
 }
 
 .user {
-    align-items: center;
-    gap: 20px;
+    border-bottom: 1px solid whitesmoke;
+    cursor: pointer;
 }
 
-.list {
-    gap: 20px;
+.user:hover {
+    background-color: whitesmoke;
+}
+
+.user:last-of-type {
+    border-bottom: none;
 }
 
 .user img {
     border-radius: 50%;
-    height: 40px;
+    height: 25px;
 }
 
-.header {
-    justify-content: space-between;
+.user td,
+.list th {
+    padding: 10px;
+}
+
+.list table {
+    border-collapse: collapse;
+    min-width: 100%;
+    margin-top: 10px;
+}
+
+.list tbody {
+    font-size: 0.875rem;
+}
+
+.list th {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+.list td {
     align-items: center;
-}
-
-.header button {
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-image: linear-gradient(to bottom right, rgb(135, 170, 253), rgb(155, 184, 253));
-    box-shadow: 0 0 5px 1px rgba(135, 170, 253, 0.3);
+    gap: 20px;
 }
