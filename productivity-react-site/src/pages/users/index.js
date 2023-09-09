@@ -4,6 +4,7 @@ import { collection, onSnapshot, query, where, addDoc, serverTimestamp } from 'f
 import { auth, db } from '../../config/firebase';
 import { AppContext } from "../../context/AppContext";
 import Topbar from "../../components/topbar";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import {v4 as uuidv4} from 'uuid';
 import users from './Users.module.css';
 
@@ -56,8 +57,8 @@ const Users = () => {
                 <section>
                     <div className={`${users.list} grid`}>
                         <div className={`${users.header} flex`}>
-                            <h3>{currentTeam}</h3>
-                            <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite User</button>
+                            {/* <h3>{currentTeam}</h3>
+                            <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite User</button> */}
                         </div>
                         <table>
                             <thead>
@@ -83,6 +84,12 @@ const Users = () => {
                                         ))
                                     ))
                                 }
+                                <tr className={`${users.user} ${users.add}`} onClick={() => setInviteOpen(true)}>
+                                    <td><AiOutlinePlusCircle/></td>
+                                    <td>Invite User</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

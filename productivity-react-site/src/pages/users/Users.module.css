@@ -12,6 +12,20 @@
     box-shadow: 0 0 5px 1px rgba(135, 170, 253, 0.3);
 }
 
+.add {
+    color: rgb(170, 170, 170);
+}
+
+.add td:first-of-type {
+    display: flex;
+    align-items: center;
+}
+
+.add td > * {
+    width: 25px;
+    height: auto;
+}
+
 .users p,
 .users h3 {
     margin: 0;
@@ -55,7 +69,7 @@
 .list table {
     border-collapse: collapse;
     min-width: 100%;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .list tbody {
