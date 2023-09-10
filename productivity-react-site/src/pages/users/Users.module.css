@@ -66,6 +66,10 @@
     padding: 10px;
 }
 
+.list {
+    overflow-x: scroll;
+}
+
 .list table {
     border-collapse: collapse;
     min-width: 100%;
