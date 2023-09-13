@@ -9,6 +9,7 @@ const Invites = () => {
     const [invites, setInvites] = useState([]);
     const [invitesOpen, setInvitesOpen] = useState(false);
     const invitesRef = collection(db, "invites");
+    const [invitesCount, setInvitesCount] = useState(0);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -23,6 +24,7 @@ const Invites = () => {
                         invites.push({...doc.data(), id: doc.id});
                     });
                     setInvites(invites);
+                    setInvitesCount(invites.length);
                 });
                 return () => unsubscribe();
             }
@@ -54,7 +56,10 @@ const Invites = () => {
 
     return (
         <>
-            <RiNotification3Line title='Invites' onClick={() => setInvitesOpen(true)}/>
+            <div>
+                <RiNotification3Line className="flex" title='Invites' onClick={() => setInvitesOpen(true)}/>
+                { invitesCount > 0 && <p className={topbar.count}>{invitesCount}</p> }
+            </div>
             <dialog className={`${topbar.invites} blk-shadow`} open={invitesOpen}>
                 <RiCloseCircleLine onClick={() => setInvitesOpen(false)}/>
                 {

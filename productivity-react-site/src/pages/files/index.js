@@ -15,6 +15,8 @@ const Files = () => {
     const [fileList, setFileList] = useState([]);
 
     useEffect(() => {
+        setFileList([]);
+
         listAll(fileListRef)
             .then((response) => {
                 response.items.forEach((item) => {

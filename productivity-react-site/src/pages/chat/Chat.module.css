@@ -3,9 +3,9 @@
     height: calc(100vh - 105px);
 }
 
-.chat p {
+/* .chat p {
     margin: 0;
-}
+} */
 
 .messages {
     gap: 20px;

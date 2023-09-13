@@ -26,10 +26,10 @@
     height: auto;
 }
 
-.users p,
+/* .users p,
 .users h3 {
     margin: 0;
-}
+} */
 
 .users section {
     min-height: calc(100vh - 105px);
