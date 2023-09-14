@@ -129,6 +129,7 @@
 
 .inviteModal {
     grid-template-columns: 1fr auto;
+    align-items: center;
     gap: 20px;
     color: gray;
 }
@@ -143,7 +144,6 @@
     border: 0.5px solid gray;
     padding: 5px 10px;
     border-radius: 5px;
-    color: gray;
     background-color: whitesmoke;
 }
 

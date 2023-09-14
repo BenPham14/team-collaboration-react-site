@@ -50,13 +50,15 @@ const Files = () => {
             <main className={files.files}>
                 <Topbar/>
                 <section className={files.list}>
-                    <div className={`${files.buttons} flex`}>
+                    <div className={`${files.uploadButton} flex`}>
                         <button onClick={() => setUploadOpen(true)}>+ Upload File</button>
                     </div>
                     <dialog open={uploadOpen}>
                         <input type="file" onChange={(event) => setFileUpload(event.target.files[0])}/>
-                        <button onClick={uploadFile}>Upload</button>
-                        <button onClick={() => setUploadOpen(false)}>Cancel</button>
+                        <div className={`${files.fileButtons} flex`}>
+                            <button onClick={uploadFile}>Upload</button>
+                            <button onClick={() => setUploadOpen(false)}>Cancel</button>
+                        </div>
                     </dialog>
                     <table>
                         <thead>
