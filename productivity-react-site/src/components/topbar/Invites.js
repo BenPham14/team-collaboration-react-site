@@ -64,10 +64,12 @@ const Invites = () => {
                 <RiCloseCircleLine onClick={() => setInvitesOpen(false)}/>
                 {
                     invites.map((invite) => (
-                        <form key={invite.uid}>
+                        <form key={invite.uid} className={`${topbar.inviteModal} grid`}>
                             <p>{invite.inviter} invited you to join their team - {invite.team}</p>
-                            <button onClick={() => handleAccept(invite.teamDoc, invite.id)}>Accept</button>
-                            <button onClick={() => handleDecline(invite.id)}>Decline</button>
+                            <div className={`${topbar.inviteButtons} flex`}>
+                                <button onClick={() => handleAccept(invite.teamDoc, invite.id)}>Accept</button>
+                                <button onClick={() => handleDecline(invite.id)}>Decline</button>
+                            </div>
                         </form>
                     ))
                 }

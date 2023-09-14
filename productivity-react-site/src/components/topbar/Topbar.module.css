@@ -108,8 +108,43 @@
     width: 100%;
 }
 
+.create input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+.invites,
+.create {
+    z-index: 1;
+    max-width: 80%;
+    border-radius: 5px;
+    border: 0.5px solid gray;
+    color: gray;
+}
+
 .invites p {
     margin: 0;
+}
+
+.inviteModal {
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    color: gray;
+}
+
+.inviteButtons {
+    align-items: center;
+    gap: 5px;
+}
+
+.inviteButtons button,
+.create button {
+    border: 0.5px solid gray;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: gray;
+    background-color: whitesmoke;
 }
 
 .count {

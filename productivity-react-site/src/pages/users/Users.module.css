@@ -90,3 +90,37 @@
     align-items: center;
     gap: 20px;
 }
+
+.invite {
+    z-index: 1;
+    max-width: 80%;
+    border-radius: 5px;
+    border: 0.5px solid gray;
+    color: gray;
+}
+
+.invite input {
+    color: gray;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: whitesmoke;
+}
+
+.inviteButtons {
+    gap: 5px;
+    align-items: center;
+}
+
+.invite button {
+    width: 100%;
+    color: gray;
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: whitesmoke;
+}
+
+.invite form {
+    gap: 10px;
+}

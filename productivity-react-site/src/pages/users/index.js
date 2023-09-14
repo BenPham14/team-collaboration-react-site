@@ -93,11 +93,13 @@ const Users = () => {
                             </tbody>
                         </table>
                     </div>
-                    <dialog open={inviteOpen}>
-                        <form onSubmit={handleSend}>
+                    <dialog open={inviteOpen} className={users.invite}>
+                        <form onSubmit={handleSend} className="flex column">
                             <input type="email" value={newName} placeholder="Enter Email" onChange={(event) => setNewName(event.target.value)} required/>
-                            <button type="submit">Create</button>
-                            <button type="button" onClick={() => {setInviteOpen(!inviteOpen); setNewName("")}}>Cancel</button>
+                            <div className={`${users.inviteButtons} flex`}>
+                                <button type="submit">Create</button>
+                                <button type="button" onClick={() => {setInviteOpen(!inviteOpen); setNewName("")}}>Cancel</button>
+                            </div>
                         </form>
                     </dialog>
                 </section>
