@@ -127,11 +127,21 @@
     margin: 0;
 }
 
-.inviteModal {
+.inviteRow {
     grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 20px;
+    gap: 20px;  
     color: gray;
+    padding: 10px 0;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.inviteRow:first-of-type {
+    padding-top: 0;
+}
+
+.inviteRow:last-of-type {
+    border-bottom: none;
 }
 
 .inviteButtons {
