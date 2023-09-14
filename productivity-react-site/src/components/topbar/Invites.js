@@ -1,6 +1,6 @@
 import { RiNotification3Line, RiCloseCircleLine } from "react-icons/ri";
 import topbar from "./Topbar.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { auth, db } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, onSnapshot, query, updateDoc, where, deleteDoc } from 'firebase/firestore';
@@ -10,6 +10,15 @@ const Invites = () => {
     const [invitesOpen, setInvitesOpen] = useState(false);
     const invitesRef = collection(db, "invites");
     const [invitesCount, setInvitesCount] = useState(0);
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        if (invitesOpen) {
+            modalRef.current.showModal();
+        } else {
+            modalRef.current.close();
+        };
+    }, [invitesOpen])
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -60,7 +69,7 @@ const Invites = () => {
                 <RiNotification3Line className="flex" title='Invites' onClick={() => setInvitesOpen(true)}/>
                 { invitesCount > 0 && <p className={topbar.count}>{invitesCount}</p> }
             </div>
-            <dialog className={`${topbar.invites} blk-shadow`} open={invitesOpen}>
+            <dialog className={`${topbar.invites} blk-shadow`} ref={modalRef}>
                 <RiCloseCircleLine onClick={() => setInvitesOpen(false)}/>
                 {
                     invites.map((invite) => (

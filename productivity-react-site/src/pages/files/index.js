@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Sidebar from "../../components/sidebar";
 import Topbar from "../../components/topbar";
 import files from "./files.module.css";
@@ -13,6 +13,15 @@ const Files = () => {
     const { currentTeamUID } = useContext(AppContext);
     const fileListRef = ref(storage, `${currentTeamUID}/`);
     const [fileList, setFileList] = useState([]);
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        if(uploadOpen) {
+            modalRef.current.showModal();
+        } else {
+            modalRef.current.close();
+        };
+    }, [uploadOpen])
 
     useEffect(() => {
         setFileList([]);
@@ -53,7 +62,7 @@ const Files = () => {
                     <div className={`${files.uploadButton} flex`}>
                         <button onClick={() => setUploadOpen(true)}>+ Upload File</button>
                     </div>
-                    <dialog open={uploadOpen}>
+                    <dialog ref={modalRef}>
                         <input type="file" onChange={(event) => setFileUpload(event.target.files[0])}/>
                         <div className={`${files.fileButtons} flex`}>
                             <button onClick={uploadFile}>Upload</button>

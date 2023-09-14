@@ -28,7 +28,7 @@
 
 .list dialog {
     max-width: 80%;
-    top: 40vh;
+    /* top: 40vh; */
 }
 
 .list input[type = file]::file-selector-button {

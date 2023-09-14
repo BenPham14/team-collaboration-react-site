@@ -96,7 +96,7 @@
 
 .create,
 .invites {
-    top: 40vh;
+    /* top: 40vh; */
     cursor: default;
 }
 

@@ -1,5 +1,5 @@
 import { GoChevronDown, GoChevronUp } from "react-icons/go"
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import topbar from "./Topbar.module.css";
 import { AppContext } from "../../context/AppContext";
 import { auth } from "../../config/firebase";
@@ -10,6 +10,15 @@ const TeamSelect = ({createOpen, setCreateOpen, teams, teamsRef }) => {
     const [teamSelect, setTeamSelect] = useState(false);
     const [newName, setNewName] = useState("");
     const { currentTeam, setCurrentTeam, setCurrentTeamUID, setCurrentTeamDoc } = useContext(AppContext);
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        if (createOpen) {
+            modalRef.current.showModal();
+        } else {
+            modalRef.current.close();
+        };
+    }, [createOpen]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -59,7 +68,7 @@ const TeamSelect = ({createOpen, setCreateOpen, teams, teamsRef }) => {
                     </div>
                 }
             </div>
-            <dialog className={`${topbar.create} blk-shadow`} open={createOpen}>
+            <dialog className={`${topbar.create} blk-shadow`} ref={modalRef}>
                 <form className="flex column" onSubmit={handleSubmit}>
                     <input type="text" placeholder="Enter Team Name" value={newName} onChange={(event) => setNewName(event.target.value)} required/>
                     <div className="flex">

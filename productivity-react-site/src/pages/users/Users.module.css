@@ -35,9 +35,9 @@
     min-height: calc(100vh - 105px);
 }
 
-.users dialog {
+/* .users dialog {
     top: 40vh;
-}
+} */
 
 .users button {
     cursor: pointer;

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import Sidebar from "../../components/sidebar";
 import { collection, onSnapshot, query, where, addDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
@@ -15,6 +15,15 @@ const Users = () => {
     const [inviteOpen, setInviteOpen] = useState(false);
     const [newName, setNewName] = useState("");
     const { currentTeam, currentTeamUID, currentTeamDoc } = useContext(AppContext);
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        if (inviteOpen) {
+            modalRef.current.showModal();
+        } else {
+            modalRef.current.close();
+        };
+    }, [inviteOpen]);
     
     useEffect(() => {
         const queryTeams = query(
@@ -93,7 +102,7 @@ const Users = () => {
                             </tbody>
                         </table>
                     </div>
-                    <dialog open={inviteOpen} className={users.invite}>
+                    <dialog ref={modalRef} className={users.invite}>
                         <form onSubmit={handleSend} className="flex column">
                             <input type="email" value={newName} placeholder="Enter Email" onChange={(event) => setNewName(event.target.value)} required/>
                             <div className={`${users.inviteButtons} flex`}>
