@@ -25,11 +25,11 @@ function App() {
     <AppContextProvider>
       <HashRouter>
         <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/chat' element={<Chat/>}/>
-          <Route path='/tasks' element={<Tasks/>}/>
-          <Route path='/files' element={<Files/>}/>
-          <Route path='/users' element={<Users/>}/>
+          <Route path='/' element={<Home setIsAuth={setIsAuth}/>}/>
+          <Route path='/chat' element={<Chat setIsAuth={setIsAuth}/>}/>
+          <Route path='/tasks' element={<Tasks setIsAuth={setIsAuth}/>}/>
+          <Route path='/files' element={<Files setIsAuth={setIsAuth}/>}/>
+          <Route path='/users' element={<Users setIsAuth={setIsAuth}/>}/>
         </Routes>
       </HashRouter>
     </AppContextProvider>

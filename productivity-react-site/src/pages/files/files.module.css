@@ -26,6 +26,11 @@
     border-radius: 5px;
 }
 
+.list dialog button,
+.list input[type = file]::file-selector-button {
+    cursor: pointer;
+}
+
 .list dialog {
     max-width: 80%;
     /* top: 40vh; */

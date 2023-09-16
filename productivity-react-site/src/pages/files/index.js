@@ -7,7 +7,7 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { AppContext } from "../../context/AppContext";
 import {v4 as uuidv4} from 'uuid';
 
-const Files = () => {
+const Files = ({setIsAuth}) => {
     const [uploadOpen, setUploadOpen] = useState(false);
     const [fileUpload, setFileUpload] = useState(null);
     const { currentTeamUID } = useContext(AppContext);
@@ -57,7 +57,7 @@ const Files = () => {
         <>
             <Sidebar/>
             <main className={files.files}>
-                <Topbar/>
+                <Topbar setIsAuth={setIsAuth}/>
                 <section className={files.list}>
                     <div className={`${files.uploadButton} flex`}>
                         <button onClick={() => setUploadOpen(true)}>+ Upload File</button>

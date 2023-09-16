@@ -173,3 +173,32 @@
     justify-content: center;
     font-size: 0.625rem;
 }
+
+.profileIcon {
+    align-items: center;
+}
+
+.profileIcon > * {
+    position: relative;
+}
+
+.signOut {
+    position: absolute;
+    right: 40px;
+    top: 65px;
+    background-color: white;
+    padding: 10px;
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    z-index: 1;
+    cursor: default;
+}
+
+.signOut button {
+    border: 0.5px solid gray;
+    font-size: 0.6875rem;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}

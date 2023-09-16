@@ -8,7 +8,7 @@ import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where 
 import { auth, db } from '../../config/firebase';
 import { AppContext } from "../../context/AppContext";
 
-const Chat = () => {
+const Chat = ({setIsAuth}) => {
     const [newMessage, setNewMessage] = useState("");
     const messagesRef = collection(db, "messages"); // get data from firebase collection
     const { currentTeam, currentTeamUID } = useContext(AppContext);
@@ -52,7 +52,7 @@ const Chat = () => {
         <>
             <Sidebar />
             <main className={chat.chat}>
-                <Topbar />
+                <Topbar setIsAuth={setIsAuth}/>
                 <div className={`${chat.sections} grid`}>
                     <section className={`${chat.messages} flex column`}>
                         {

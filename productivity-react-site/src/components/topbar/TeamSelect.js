@@ -58,10 +58,10 @@ const TeamSelect = ({createOpen, setCreateOpen, teams, teamsRef }) => {
                 {
                     teamSelect &&
                     <div className={`${topbar.dropDown} flex column`}>
-                        <button onClick={() => setCreateOpen(true)}>+ Create Team</button>
+                        <button className="blk-shadow" onClick={() => setCreateOpen(true)}>+ Create Team</button>
                         {
                             teams.map((team) => (
-                                <button key={team.id} onClick={() => handleSelect(team.name, team.uid, team.id)}>{team.name}</button>
+                                <button className="blk-shadow" key={team.id} onClick={() => handleSelect(team.name, team.uid, team.id)}>{team.name}</button>
                             ))
                         }
                         

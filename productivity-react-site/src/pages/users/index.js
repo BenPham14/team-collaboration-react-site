@@ -8,7 +8,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import {v4 as uuidv4} from 'uuid';
 import users from './Users.module.css';
 
-const Users = () => {
+const Users = ({setIsAuth}) => {
     const teamsRef = collection(db, "teams");
     const invitesRef = collection(db, "invites");
     const [teams, setTeams] = useState([]);
@@ -62,7 +62,7 @@ const Users = () => {
         <>
             <Sidebar/>
             <main className={users.users}>
-                <Topbar />
+                <Topbar setIsAuth={setIsAuth}/>
                 <section>
                     <div className={`${users.list} grid`}>
                         <div className={`${users.header} flex`}>

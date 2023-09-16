@@ -1,12 +1,12 @@
 import Sidebar from "../../components/sidebar";
 import Topbar from "../../components/topbar";
 
-const Home = () => {
+const Home = ({setIsAuth}) => {
     return (
         <>
             <Sidebar />
             <main>
-                <Topbar />
+                <Topbar setIsAuth={setIsAuth}/>
             </main>
         </>
     );

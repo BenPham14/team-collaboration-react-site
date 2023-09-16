@@ -9,7 +9,7 @@ import { auth, db } from '../../config/firebase';
 import {v4 as uuidv4} from 'uuid';
 import { AppContext } from "../../context/AppContext";
 
-const Tasks = () => {
+const Tasks = ({setIsAuth}) => {
     const [newItem, setNewItem] = useState("");
     const [newDate, setNewDate] = useState("");
     const [tasksList, setTaskList] = useState([]);
@@ -79,7 +79,7 @@ const Tasks = () => {
         <>
             <Sidebar />
             <main className={tasks.tasks}>
-                <Topbar />
+                <Topbar setIsAuth={setIsAuth}/>
                 <div className={`${tasks.sections} grid`}>
                     <section className={`${tasks.list} flex column`}>
                         <form className={`grid`} onKeyDown={handleEnter}>

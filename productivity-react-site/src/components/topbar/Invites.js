@@ -67,10 +67,10 @@ const Invites = () => {
         <>
             <div>
                 <RiNotification3Line className="flex" title='Invites' onClick={() => setInvitesOpen(true)}/>
-                { invitesCount > 0 && <p className={topbar.count}>{invitesCount}</p> }
+                { invitesCount > 0 && <p className={topbar.count} onClick={() => setInvitesOpen(true)}>{invitesCount}</p> }
             </div>
             <dialog className={`${topbar.invites} blk-shadow`} ref={modalRef}>
-                <RiCloseCircleLine onClick={() => setInvitesOpen(false)}/>
+                <RiCloseCircleLine onClick={() => setInvitesOpen(false)} style={{cursor: "pointer"}}/>
                 {
                     invites.map((invite) => (
                         <form key={invite.uid} className={`${topbar.inviteRow} grid`}>
