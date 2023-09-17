@@ -10,7 +10,7 @@ import Invites from "./Invites";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-const Topbar = ({setIsAuth}) => {
+const Topbar = ({setIsAuth, setTeamsList}) => {
     const [teams, setTeams] = useState([]);
     const [currentPage, setCurrentPage] = useState("Home");
     const [profile, setProfile] = useState("");
@@ -34,6 +34,7 @@ const Topbar = ({setIsAuth}) => {
                         teams.push({...doc.data(), id: doc.id});
                     });
                     setTeams(teams);
+                    setTeamsList(teams);
 
                     if (currentTeam === "" && teams[0]) {
                         setCurrentTeam(teams[0].name);

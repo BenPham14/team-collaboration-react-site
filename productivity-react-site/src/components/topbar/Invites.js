@@ -72,15 +72,17 @@ const Invites = () => {
             <dialog className={`${topbar.invites} blk-shadow`} ref={modalRef}>
                 <RiCloseCircleLine onClick={() => setInvitesOpen(false)} style={{cursor: "pointer"}}/>
                 {
-                    invites.map((invite) => (
-                        <form key={invite.uid} className={`${topbar.inviteRow} grid`}>
-                            <p>{invite.inviter} invited you to join their team - {invite.team}</p>
-                            <div className={`${topbar.inviteButtons} flex`}>
-                                <button onClick={() => handleAccept(invite.teamDoc, invite.id)}>Accept</button>
-                                <button onClick={() => handleDecline(invite.id)}>Decline</button>
-                            </div>
-                        </form>
-                    ))
+                    invitesCount == 0 ? 
+                        <p>No Invites</p> :
+                        invites.map((invite) => (
+                            <form key={invite.uid} className={`${topbar.inviteRow} grid`}>
+                                <p>{invite.inviter} invited you to join their team - {invite.team}</p>
+                                <div className={`${topbar.inviteButtons} flex`}>
+                                    <button onClick={() => handleAccept(invite.teamDoc, invite.id)}>Accept</button>
+                                    <button onClick={() => handleDecline(invite.id)}>Decline</button>
+                                </div>
+                            </form>
+                        ))
                 }
             </dialog>
         </>
