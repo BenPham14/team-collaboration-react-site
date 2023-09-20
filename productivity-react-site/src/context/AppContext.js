@@ -8,6 +8,7 @@ const AppContextProvider = (props) => {
     const [currentTeam, setCurrentTeam] = useState("");
     const [currentTeamUID, setCurrentTeamUID] = useState("");
     const [currentTeamDoc, setCurrentTeamDoc] = useState("");
+    const [teamsList, setTeamsList] = useState([]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -29,7 +30,7 @@ const AppContextProvider = (props) => {
         {label: 'Users', icon: <RiGroupLine />, path: '/users'}
     ];
 
-    const contextValue = { links, screenWidth, currentTeam, setCurrentTeam, currentTeamUID, setCurrentTeamUID, currentTeamDoc, setCurrentTeamDoc };
+    const contextValue = { links, screenWidth, currentTeam, setCurrentTeam, currentTeamUID, setCurrentTeamUID, currentTeamDoc, setCurrentTeamDoc, teamsList, setTeamsList };
 
     return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>
 };

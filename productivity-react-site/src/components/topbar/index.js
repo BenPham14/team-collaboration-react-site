@@ -10,13 +10,13 @@ import Invites from "./Invites";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-const Topbar = ({setIsAuth, setTeamsList}) => {
+const Topbar = ({setIsAuth}) => {
     const [teams, setTeams] = useState([]);
     const [currentPage, setCurrentPage] = useState("Home");
     const [profile, setProfile] = useState("");
     const [createOpen, setCreateOpen] = useState(false);
     const [signOutOpen, setSignOutOpen] = useState(false);
-    const { links, currentTeam, setCurrentTeam, setCurrentTeamUID, setCurrentTeamDoc } = useContext(AppContext);
+    const { links, currentTeam, setCurrentTeam, setCurrentTeamUID, setCurrentTeamDoc, setTeamsList } = useContext(AppContext);
     const teamsRef = collection(db, "teams");
 
     useEffect(() => {
