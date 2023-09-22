@@ -4,7 +4,7 @@ import Topbar from "../../components/topbar";
 import { AppContext } from "../../context/AppContext";
 import home from "./Home.module.css";
 import { collection, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 
 const Home = ({setIsAuth}) => {
     const { currentTeam, currentTeamUID, teamsList } = useContext(AppContext);
@@ -12,6 +12,8 @@ const Home = ({setIsAuth}) => {
     const [team, setTeam] = useState([]);
     const messagesRef = collection(db, "messages");
     const [messages, setMessages] = useState([]);
+    const tasksRef = collection(db, "tasks");
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         const queryTeams = query(
@@ -26,15 +28,26 @@ const Home = ({setIsAuth}) => {
             messagesRef, 
             where("teamUID", "==", currentTeamUID), 
             orderBy("createdAt", "desc"),
-            limit(1)
+            limit(2)
         );
         const unsubscribe2 = onSnapshot(queryMessages, (snapshot) => {
             setMessages(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
         });
 
+        const queryTasks = query(
+            tasksRef,
+            where("teamUID", "==", currentTeamUID),
+            orderBy("createdAt"),
+            limit(1)
+        );
+        const unsubscribe3 = onSnapshot(queryTasks, (snapshot) => {
+            setTasks(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
+        });
+
         return () => {
             unsubscribe1();
             unsubscribe2();
+            unsubscribe3();
         }
     }, [currentTeamUID]);
 
@@ -43,7 +56,7 @@ const Home = ({setIsAuth}) => {
             <Sidebar />
             <main className={home.home}>
                 <Topbar setIsAuth={setIsAuth}/>
-                <section>
+                <section className={home.teams}>
                     <p>Teams you are in:</p>
                     {
                         teamsList.map((team, index) => (
@@ -51,12 +64,12 @@ const Home = ({setIsAuth}) => {
                         ))
                     }
                 </section>
-                <section>
+                <section className={home.members}>
                     <p>Members in "{currentTeam}" include:</p>
                     {
                         team.map((team) => (
                             Object.keys(team.members).map((keyName, index) => (
-                                <div key={index}>
+                                <div key={index} className="flex">
                                     <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
                                     <p>{team.members[keyName].name}</p>
                                 </div>
@@ -64,19 +77,24 @@ const Home = ({setIsAuth}) => {
                         ))
                     }
                 </section>
-                <section>
+                <section className={home.message}>
                     <p>Latest chat messages:</p>
                     {
                         messages.map((message, index) => (
-                            <p key={index}>{message.user} said "{message.text}"</p>
+                            <p key={index}>{message.user}: <span className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</span></p>
                         ))
                     }
                 </section>
-                <section>
+                <section className={home.task}>
                     <p>Expiring task items:</p>
-                </section>
-                <section>
-                    <p>Last file uploaded:</p>
+                    {
+                        tasks.map((task, index) => (
+                            <div className="flex">
+                                <input type="checkbox"/>
+                                <p key={index}>{task.label}</p>
+                            </div>
+                        ))
+                    }
                 </section>
             </main>
         </>

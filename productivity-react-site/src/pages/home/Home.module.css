@@ -1,3 +1,43 @@
 .home section p {
     margin: 0;
+    margin-bottom: 10px;
+}
+
+.home section p:last-of-type {
+    margin-bottom: 0;
+}
+
+.members div {
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.members img {
+    border-radius: 50%;
+    height: 25px;
+}
+
+.task div {
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.task input {
+    margin: 0;
+}
+
+.message span {
+    color: white;
+    border-radius: 10px;
+    padding: 2.5px 5px;
+}
+
+.message .other {
+    background-color: rgb(215, 215, 215);
+}
+
+.message .owner {
+    background-color: rgb(155, 184, 253);
 }

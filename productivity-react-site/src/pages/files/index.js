@@ -26,16 +26,13 @@ const Files = ({setIsAuth}) => {
     useEffect(() => {
         setFileList([]);
 
-        listAll(fileListRef)
-            .then((response) => {
-                response.items.forEach((item) => {
-                    getDownloadURL(item)
-                        .then((url) => {
-                            setFileList((prev) => [...prev, {downloadURL: url, name: item.name}]);
-                        });
-                        // console.log(response.items[0]);
+        listAll(fileListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url) => {
+                    setFileList((prev) => [...prev, {downloadURL: url, name: item.name}]);
                 });
             });
+        });
     }, [currentTeamUID]);
 
     const uploadFile = () => {
