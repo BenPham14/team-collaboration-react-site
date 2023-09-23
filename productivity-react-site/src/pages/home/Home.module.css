@@ -1,16 +1,32 @@
+.members,
+.singleMessage,
+.message,
+.task,
+.task div {
+    gap: 10px;
+}
+
+.task input,
+.header > *:last-child {
+    cursor: pointer;
+}
+
 .home section p {
     margin: 0;
-    margin-bottom: 10px;
 }
 
 .home section p:last-of-type {
     margin-bottom: 0;
 }
 
+.header {
+    align-items: center;
+    justify-content: space-between;
+}
+
 .members div {
     align-items: center;
     gap: 10px;
-    margin-top: 10px;
 }
 
 .members img {
@@ -20,24 +36,27 @@
 
 .task div {
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
 }
 
 .task input {
     margin: 0;
 }
 
-.message span {
+.singleMessage p:first-of-type {
+    white-space: nowrap; 
+}
+
+.owner, 
+.other {
     color: white;
     border-radius: 10px;
     padding: 2.5px 5px;
 }
 
-.message .other {
+.other {
     background-color: rgb(215, 215, 215);
 }
 
-.message .owner {
+.owner {
     background-color: rgb(155, 184, 253);
 }

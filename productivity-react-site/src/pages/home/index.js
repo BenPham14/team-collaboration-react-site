@@ -3,8 +3,9 @@ import Sidebar from "../../components/sidebar";
 import Topbar from "../../components/topbar";
 import { AppContext } from "../../context/AppContext";
 import home from "./Home.module.css";
-import { collection, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
+import { RiMore2Fill } from "react-icons/ri";
 
 const Home = ({setIsAuth}) => {
     const { currentTeam, currentTeamUID, teamsList } = useContext(AppContext);
@@ -38,7 +39,7 @@ const Home = ({setIsAuth}) => {
             tasksRef,
             where("teamUID", "==", currentTeamUID),
             orderBy("createdAt"),
-            limit(1)
+            limit(2)
         );
         const unsubscribe3 = onSnapshot(queryTasks, (snapshot) => {
             setTasks(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
@@ -50,6 +51,13 @@ const Home = ({setIsAuth}) => {
             unsubscribe3();
         }
     }, [currentTeamUID]);
+
+    const deleteTask = (taskDoc) => {
+        const taskRef = doc(db, "tasks", taskDoc);
+        setTimeout(async () => {
+            await deleteDoc(taskRef);
+        }, 200);
+    };
 
     return (
         <>
@@ -64,8 +72,11 @@ const Home = ({setIsAuth}) => {
                         ))
                     }
                 </section>
-                <section className={home.members}>
-                    <p>Members in "{currentTeam}" include:</p>
+                <section className={`${home.members} flex column`}>
+                    <div className={`${home.header} flex`}>
+                        <p>Members in "{currentTeam}" include:</p>
+                        <RiMore2Fill/>
+                    </div>
                     {
                         team.map((team) => (
                             Object.keys(team.members).map((keyName, index) => (
@@ -77,20 +88,30 @@ const Home = ({setIsAuth}) => {
                         ))
                     }
                 </section>
-                <section className={home.message}>
-                    <p>Latest chat messages:</p>
+                <section className={`${home.message} flex column`}>
+                    <div className={`${home.header} flex`}>
+                        <p>Latest chat messages:</p>
+                        <RiMore2Fill/>
+                    </div>
                     {
                         messages.map((message, index) => (
-                            <p key={index}>{message.user}: <span className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</span></p>
+                            <div key={index} className={`${home.singleMessage} flex`}>
+                                <p>{message.user}:</p>
+                                <p className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</p>
+                            </div>
+                            // <p key={index}>{message.user}: <span className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</span></p>
                         ))
                     }
                 </section>
-                <section className={home.task}>
-                    <p>Expiring task items:</p>
+                <section className={`${home.task} flex column`}>
+                    <div className={`${home.header} flex`}>
+                        <p>Expiring task items:</p>
+                        <RiMore2Fill/>
+                    </div>
                     {
                         tasks.map((task, index) => (
-                            <div className="flex">
-                                <input type="checkbox"/>
+                            <div className="flex" key={index}>
+                                <input type="checkbox" onClick={() => deleteTask(task.id)}/>
                                 <p key={index}>{task.label}</p>
                             </div>
                         ))
