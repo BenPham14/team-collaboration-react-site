@@ -11,8 +11,13 @@
     cursor: pointer;
 }
 
-.home section p {
+.sections {
+    gap: 20px;
+}
+
+.sections p {
     margin: 0;
+    font-size: 0.875rem;
 }
 
 .home section p:last-of-type {
@@ -22,6 +27,28 @@
 .header {
     align-items: center;
     justify-content: space-between;
+}
+
+.header p {
+    font-size: 1rem;
+}
+
+.teams {
+    gap: 5px;
+}
+
+.teams .header p {
+    padding-bottom: 5px;
+}
+
+.team {
+    align-items: center;
+    gap: 10px;
+    padding: 2.5px 5px;
+    border-radius: 5px;
+    /* background-color: whitesmoke; */
+    /* border-bottom: 1px solid whitesmoke; */
+    /* width: fit-content; */
 }
 
 .members div {
@@ -59,4 +86,10 @@
 
 .owner {
     background-color: rgb(155, 184, 253);
+}
+
+@media only screen and (min-width: 768px) {
+    .sections {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

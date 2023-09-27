@@ -5,7 +5,7 @@ import { AppContext } from "../../context/AppContext";
 import home from "./Home.module.css";
 import { collection, deleteDoc, doc, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
-import { RiMore2Fill } from "react-icons/ri";
+import { RiMore2Fill, RiTeamLine } from "react-icons/ri";
 
 const Home = ({setIsAuth}) => {
     const { currentTeam, currentTeamUID, teamsList } = useContext(AppContext);
@@ -64,59 +64,69 @@ const Home = ({setIsAuth}) => {
             <Sidebar />
             <main className={home.home}>
                 <Topbar setIsAuth={setIsAuth}/>
-                <section className={home.teams}>
-                    <p>Teams you are in:</p>
-                    {
-                        teamsList.map((team, index) => (
-                            <p key={index}>{team.name}</p>
-                        ))
-                    }
-                </section>
-                <section className={`${home.members} flex column`}>
-                    <div className={`${home.header} flex`}>
-                        <p>Members in "{currentTeam}" include:</p>
-                        <RiMore2Fill/>
-                    </div>
-                    {
-                        team.map((team) => (
-                            Object.keys(team.members).map((keyName, index) => (
-                                <div key={index} className="flex">
-                                    <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
-                                    <p>{team.members[keyName].name}</p>
+                <div className={`${home.sections} grid`}>
+                    <section className={`${home.teams} flex column`}>
+                        <div className={home.header}>
+                            <p>Your teams</p>
+                        </div>
+                        {
+                            teamsList.map((team, index) => (
+                                <div 
+                                    className={`${home.team} flex`} 
+                                    style={{backgroundColor: team.name == currentTeam && "whitesmoke"}}
+                                >
+                                    <RiTeamLine/>
+                                    <p key={index}>{team.name}</p>
                                 </div>
                             ))
-                        ))
-                    }
-                </section>
-                <section className={`${home.message} flex column`}>
-                    <div className={`${home.header} flex`}>
-                        <p>Latest chat messages:</p>
-                        <RiMore2Fill/>
-                    </div>
-                    {
-                        messages.map((message, index) => (
-                            <div key={index} className={`${home.singleMessage} flex`}>
-                                <p>{message.user}:</p>
-                                <p className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</p>
-                            </div>
-                            // <p key={index}>{message.user}: <span className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</span></p>
-                        ))
-                    }
-                </section>
-                <section className={`${home.task} flex column`}>
-                    <div className={`${home.header} flex`}>
-                        <p>Expiring task items:</p>
-                        <RiMore2Fill/>
-                    </div>
-                    {
-                        tasks.map((task, index) => (
-                            <div className="flex" key={index}>
-                                <input type="checkbox" onClick={() => deleteTask(task.id)}/>
-                                <p key={index}>{task.label}</p>
-                            </div>
-                        ))
-                    }
-                </section>
+                        }
+                    </section>
+                    <section className={`${home.members} flex column`}>
+                        <div className={`${home.header} flex`}>
+                            <p>Current team members</p>
+                            <RiMore2Fill/>
+                        </div>
+                        {
+                            team.map((team) => (
+                                Object.keys(team.members).map((keyName, index) => (
+                                    <div key={index} className="flex">
+                                        <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
+                                        <p>{team.members[keyName].name}</p>
+                                    </div>
+                                ))
+                            ))
+                        }
+                    </section>
+                    <section className={`${home.message} flex column`}>
+                        <div className={`${home.header} flex`}>
+                            <p>Latest chat messages</p>
+                            <RiMore2Fill/>
+                        </div>
+                        {
+                            messages.map((message, index) => (
+                                <div key={index} className={`${home.singleMessage} flex`}>
+                                    <p>{message.user}:</p>
+                                    <p className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</p>
+                                </div>
+                                // <p key={index}>{message.user}: <span className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</span></p>
+                            ))
+                        }
+                    </section>
+                    <section className={`${home.task} flex column`}>
+                        <div className={`${home.header} flex`}>
+                            <p>Expiring task items</p>
+                            <RiMore2Fill/>
+                        </div>
+                        {
+                            tasks.map((task, index) => (
+                                <div className="flex" key={index}>
+                                    <input type="checkbox" onClick={() => deleteTask(task.id)}/>
+                                    <p key={index}>{task.label}</p>
+                                </div>
+                            ))
+                        }
+                    </section>
+                </div>
             </main>
         </>
     );
