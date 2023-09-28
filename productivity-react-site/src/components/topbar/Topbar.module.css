@@ -94,12 +94,6 @@
     padding: 5px;
 }
 
-.create,
-.invites {
-    /* top: 40vh; */
-    cursor: default;
-}
-
 .create form {
     gap: 10px;
 }
@@ -121,6 +115,8 @@
     border-radius: 5px;
     border: 0.5px solid gray;
     color: gray;
+    cursor: default;
+    font-size: 0.875rem;
 }
 
 .invites p {

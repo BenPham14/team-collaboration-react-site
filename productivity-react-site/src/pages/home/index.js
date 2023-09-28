@@ -5,7 +5,8 @@ import { AppContext } from "../../context/AppContext";
 import home from "./Home.module.css";
 import { collection, deleteDoc, doc, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
-import { RiMore2Fill, RiTeamLine } from "react-icons/ri";
+import { RiTeamLine } from "react-icons/ri";
+import More from "./More";
 
 const Home = ({setIsAuth}) => {
     const { currentTeam, currentTeamUID, teamsList } = useContext(AppContext);
@@ -84,7 +85,7 @@ const Home = ({setIsAuth}) => {
                     <section className={`${home.members} flex column`}>
                         <div className={`${home.header} flex`}>
                             <p>Current team members</p>
-                            <RiMore2Fill/>
+                            <More navigateTo="/users"/>
                         </div>
                         {
                             team.map((team) => (
@@ -100,7 +101,7 @@ const Home = ({setIsAuth}) => {
                     <section className={`${home.message} flex column`}>
                         <div className={`${home.header} flex`}>
                             <p>Latest chat messages</p>
-                            <RiMore2Fill/>
+                            <More navigateTo="/chat"/>
                         </div>
                         {
                             messages.map((message, index) => (
@@ -115,7 +116,7 @@ const Home = ({setIsAuth}) => {
                     <section className={`${home.task} flex column`}>
                         <div className={`${home.header} flex`}>
                             <p>Expiring task items</p>
-                            <RiMore2Fill/>
+                            <More navigateTo="/tasks"/>
                         </div>
                         {
                             tasks.map((task, index) => (

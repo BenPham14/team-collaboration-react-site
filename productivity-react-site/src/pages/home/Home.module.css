@@ -88,6 +88,30 @@
     background-color: rgb(155, 184, 253);
 }
 
+.more {
+    position: relative;
+}
+
+.more div {
+    position: absolute;
+    right: 5px;
+    top: 25px;
+    padding: 10px;
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.more button {
+    text-wrap: nowrap;
+    border: 0.5px solid gray;
+    font-size: 0.6875rem;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 @media only screen and (min-width: 768px) {
     .sections {
         grid-template-columns: repeat(2, 1fr);

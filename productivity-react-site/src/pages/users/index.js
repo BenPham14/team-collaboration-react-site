@@ -106,7 +106,7 @@ const Users = ({setIsAuth}) => {
                         <form onSubmit={handleSend} className="flex column">
                             <input type="email" value={newName} placeholder="Enter Email" onChange={(event) => setNewName(event.target.value)} required/>
                             <div className={`${users.inviteButtons} flex`}>
-                                <button type="submit">Create</button>
+                                <button type="submit">Send</button>
                                 <button type="button" onClick={() => {setInviteOpen(!inviteOpen); setNewName("")}}>Cancel</button>
                             </div>
                         </form>
