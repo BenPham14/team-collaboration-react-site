@@ -73,11 +73,12 @@ const Home = ({setIsAuth}) => {
                         {
                             teamsList.map((team, index) => (
                                 <div 
+                                    key={index} 
                                     className={`${home.team} flex`} 
                                     style={{backgroundColor: team.name == currentTeam && "whitesmoke"}}
                                 >
                                     <RiTeamLine/>
-                                    <p key={index}>{team.name}</p>
+                                    <p>{team.name}</p>
                                 </div>
                             ))
                         }

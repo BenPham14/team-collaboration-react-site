@@ -36,6 +36,7 @@ const Topbar = ({setIsAuth}) => {
                     setTeams(teams);
                     setTeamsList(teams);
 
+                    // when just signing in select the first team in the list, if there are teams
                     if (currentTeam === "" && teams[0]) {
                         setCurrentTeam(teams[0].name);
                         setCurrentTeamUID(teams[0].uid);
