@@ -82,7 +82,7 @@ const Topbar = ({setIsAuth}) => {
                 <div className={`${topbar.profileIcon} flex`}>
                     {
                         profile ? 
-                            <img title='Profile' src={profile.photoURL} alt="" referrerpolicy="no-referrer" onClick={() => setSignOutOpen(!signOutOpen)}/> :
+                            <img title='Profile' src={profile.photoURL} alt="" referrerPolicy="no-referrer" onClick={() => setSignOutOpen(!signOutOpen)}/> :
                             <RiUser3Line title='Profile' className="placeholder" onClick={() => setSignOutOpen(!signOutOpen)}/>
                     }
                     <div className={topbar.signOut} style={{display: signOutOpen ? "" : "none"}}>

@@ -6,7 +6,7 @@ const Message = ({message}) => {
     return (
         <div className={`${auth.currentUser.uid === message.uid ? chat.owner : chat.other} flex`}>
             {/* <RiUser3Line/> */}
-            <img src={message.image} alt={message.user} referrerpolicy="no-referrer"/>
+            <img src={message.image} alt={message.user} referrerPolicy="no-referrer"/>
             <p>{message.text}</p>
         </div>
     );

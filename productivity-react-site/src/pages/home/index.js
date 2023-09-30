@@ -11,7 +11,7 @@ import More from "./More";
 const Home = ({setIsAuth}) => {
     const { currentTeam, currentTeamUID, teamsList } = useContext(AppContext);
     const teamsRef = collection(db, "teams");
-    const [team, setTeam] = useState([]);
+    const [teams, setTeams] = useState([]);
     const messagesRef = collection(db, "messages");
     const [messages, setMessages] = useState([]);
     const tasksRef = collection(db, "tasks");
@@ -23,7 +23,7 @@ const Home = ({setIsAuth}) => {
             where("uid", "==", currentTeamUID)
         );
         const unsubscribe1 = onSnapshot(queryTeams, (snapshot) => {
-            setTeam(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
+            setTeams(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
         });
 
         const queryMessages = query(
@@ -71,6 +71,7 @@ const Home = ({setIsAuth}) => {
                             <p>Your teams</p>
                         </div>
                         {
+                            teamsList != [] ?
                             teamsList.map((team, index) => (
                                 <div 
                                     key={index} 
@@ -80,7 +81,8 @@ const Home = ({setIsAuth}) => {
                                     <RiTeamLine/>
                                     <p>{team.name}</p>
                                 </div>
-                            ))
+                            )) :
+                            <p>No teams to display</p>
                         }
                     </section>
                     <section className={`${home.members} flex column`}>
@@ -89,14 +91,16 @@ const Home = ({setIsAuth}) => {
                             <More navigateTo="/users"/>
                         </div>
                         {
-                            team.map((team) => (
+                            teams != [] ?
+                            teams.map((team) => (
                                 Object.keys(team.members).map((keyName, index) => (
                                     <div key={index} className="flex">
-                                        <img src={team.members[keyName].image} alt={team.members[keyName].name} referrerpolicy="no-referrer"/>
+                                        <img src={team.members[keyName].image} alt={team.members[keyName].name} referrerPolicy="no-referrer"/>
                                         <p>{team.members[keyName].name}</p>
                                     </div>
                                 ))
-                            ))
+                            )) :
+                            <p>No members to display</p>
                         }
                     </section>
                     <section className={`${home.message} flex column`}>
@@ -105,13 +109,15 @@ const Home = ({setIsAuth}) => {
                             <More navigateTo="/chat"/>
                         </div>
                         {
+                            messages != [] ?
                             messages.map((message, index) => (
                                 <div key={index} className={`${home.singleMessage} flex`}>
                                     <p>{message.user}:</p>
                                     <p className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</p>
                                 </div>
                                 // <p key={index}>{message.user}: <span className={auth.currentUser.uid === message.uid ? home.owner : home.other}>{message.text}</span></p>
-                            ))
+                            )) :
+                            <p>No messages to display</p>
                         }
                     </section>
                     <section className={`${home.task} flex column`}>
@@ -120,12 +126,14 @@ const Home = ({setIsAuth}) => {
                             <More navigateTo="/tasks"/>
                         </div>
                         {
+                            tasks != [] ?
                             tasks.map((task, index) => (
                                 <div className="flex" key={index}>
                                     <input type="checkbox" onClick={() => deleteTask(task.id)}/>
                                     <p key={index}>{task.label}</p>
                                 </div>
-                            ))
+                            )) :
+                            <p>No tasks to display</p>
                         }
                     </section>
                 </div>
