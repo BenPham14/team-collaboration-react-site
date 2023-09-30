@@ -92,7 +92,7 @@ const Home = ({setIsAuth}) => {
                             team.map((team) => (
                                 Object.keys(team.members).map((keyName, index) => (
                                     <div key={index} className="flex">
-                                        <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
+                                        <img src={team.members[keyName].image} alt={team.members[keyName].name} referrerpolicy="no-referrer"/>
                                         <p>{team.members[keyName].name}</p>
                                     </div>
                                 ))

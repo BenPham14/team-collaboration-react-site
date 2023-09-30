@@ -18,6 +18,7 @@ const Topbar = ({setIsAuth}) => {
     const [signOutOpen, setSignOutOpen] = useState(false);
     const { links, currentTeam, setCurrentTeam, setCurrentTeamUID, setCurrentTeamDoc, setTeamsList } = useContext(AppContext);
     const teamsRef = collection(db, "teams");
+    const currentTeamInfo = JSON.parse(localStorage.getItem('currentTeamInfo'));
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -37,7 +38,11 @@ const Topbar = ({setIsAuth}) => {
                     setTeamsList(teams);
 
                     // when just signing in select the first team in the list, if there are teams
-                    if (currentTeam === "" && teams[0]) {
+                    if (currentTeam === "" && currentTeamInfo) {
+                        setCurrentTeam(currentTeamInfo.currentTeam);
+                        setCurrentTeamUID(currentTeamInfo.currentTeamUID);
+                        setCurrentTeamDoc(currentTeamInfo.currentTeamDoc);
+                    } else if (currentTeam === "" && teams[0]) {
                         setCurrentTeam(teams[0].name);
                         setCurrentTeamUID(teams[0].uid);
                         setCurrentTeamDoc(teams[0].id);
@@ -59,6 +64,7 @@ const Topbar = ({setIsAuth}) => {
     const signOutUser = async () => {
         await signOut(auth);
         cookies.remove("auth-token");
+        localStorage.removeItem("currentTeamInfo");
         setIsAuth(false);
     };
 
@@ -76,7 +82,7 @@ const Topbar = ({setIsAuth}) => {
                 <div className={`${topbar.profileIcon} flex`}>
                     {
                         profile ? 
-                            <img title='Profile' src={profile.photoURL} alt="" onClick={() => setSignOutOpen(!signOutOpen)}/> :
+                            <img title='Profile' src={profile.photoURL} alt="" referrerpolicy="no-referrer" onClick={() => setSignOutOpen(!signOutOpen)}/> :
                             <RiUser3Line title='Profile' className="placeholder" onClick={() => setSignOutOpen(!signOutOpen)}/>
                     }
                     <div className={topbar.signOut} style={{display: signOutOpen ? "" : "none"}}>

@@ -84,7 +84,7 @@ const Users = ({setIsAuth}) => {
                                         Object.keys(team.members).map((keyName, id) => (
                                             <tr key={id} className={users.user}>
                                                 <td className="flex">
-                                                    <img src={team.members[keyName].image} alt={team.members[keyName].name}/>
+                                                    <img src={team.members[keyName].image} alt={team.members[keyName].name} referrerpolicy="no-referrer"/>
                                                 </td>
                                                 <td>{team.members[keyName].name}</td>
                                                 <td>{team.members[keyName].email}</td>

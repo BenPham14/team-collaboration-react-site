@@ -9,6 +9,11 @@ const AppContextProvider = (props) => {
     const [currentTeamUID, setCurrentTeamUID] = useState("");
     const [currentTeamDoc, setCurrentTeamDoc] = useState("");
     const [teamsList, setTeamsList] = useState([]);
+    const [currentTeamInfo, setCurrentTeamInfo] = useState({});
+
+    useEffect(() => {
+        localStorage.setItem('currentTeamInfo', JSON.stringify({currentTeam, currentTeamUID, currentTeamDoc}))
+    }, [currentTeam]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -30,7 +35,7 @@ const AppContextProvider = (props) => {
         {label: 'Users', icon: <RiGroupLine />, path: '/users'}
     ];
 
-    const contextValue = { links, screenWidth, currentTeam, setCurrentTeam, currentTeamUID, setCurrentTeamUID, currentTeamDoc, setCurrentTeamDoc, teamsList, setTeamsList };
+    const contextValue = { links, screenWidth, currentTeam, setCurrentTeam, currentTeamUID, setCurrentTeamUID, currentTeamDoc, setCurrentTeamDoc, teamsList, setTeamsList, currentTeamInfo };
 
     return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>
 };
