@@ -21,13 +21,14 @@ main {
 
 section {
     background-color: white;
+    color: gray;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px 1px rgba(128, 128, 128, 0.1);
-    color: gray;
 }
 
-input[type = text] {
+input[type = text],
+input[type = date] {
     color: gray;
     border: none;
     background-color: whitesmoke;
@@ -59,9 +60,7 @@ input[type = text] {
 }
 
 aside .active {
-  /* background-color: rgb(135, 112, 250); */
   background-image: linear-gradient(to bottom right, rgb(135, 112, 250), rgb(180, 165, 254));
-  /* background-image: linear-gradient(to bottom right, rgb(112, 153, 250), rgb(180, 165, 254)); */
   box-shadow: 0 0 5px 1px rgba(135, 110, 255, 0.3);
   color: white;
 }

@@ -7,15 +7,16 @@ import Topbar from "../../components/topbar";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import {v4 as uuidv4} from 'uuid';
 import users from './Users.module.css';
+import Remove from "./Remove";
 
 const Users = ({setIsAuth}) => {
     const teamsRef = collection(db, "teams");
     const invitesRef = collection(db, "invites");
     const [teams, setTeams] = useState([]);
     const [inviteOpen, setInviteOpen] = useState(false);
+    const modalRef = useRef(null);
     const [newName, setNewName] = useState("");
     const { currentTeam, currentTeamUID, currentTeamDoc } = useContext(AppContext);
-    const modalRef = useRef(null);
 
     useEffect(() => {
         if (inviteOpen) {
@@ -65,10 +66,10 @@ const Users = ({setIsAuth}) => {
                 <Topbar setIsAuth={setIsAuth}/>
                 <section>
                     <div className={`${users.list} grid`}>
-                        <div className={`${users.header} flex`}>
-                            {/* <h3>{currentTeam}</h3>
-                            <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite User</button> */}
-                        </div>
+                        {/* <div className={`${users.header} flex`}>
+                            <h3>{currentTeam}</h3>
+                            <button className="blk-shadow" onClick={() => setInviteOpen(true)}>+ Invite User</button>
+                        </div> */}
                         <table>
                             <thead>
                                 <tr>
@@ -89,6 +90,13 @@ const Users = ({setIsAuth}) => {
                                                 <td>{team.members[keyName].name}</td>
                                                 <td>{team.members[keyName].email}</td>
                                                 <td>{team.members[keyName].role}</td>
+                                                <td className={users.remove}>
+                                                    <Remove
+                                                        keyName={keyName}
+                                                        user={team.members[keyName]}
+                                                        teamDoc={team.id}
+                                                    />
+                                                </td>
                                             </tr>
                                         ))
                                     ))
@@ -96,6 +104,7 @@ const Users = ({setIsAuth}) => {
                                 <tr className={`${users.user} ${users.add}`} onClick={() => setInviteOpen(true)}>
                                     <td><AiOutlinePlusCircle/></td>
                                     <td>Invite User</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>

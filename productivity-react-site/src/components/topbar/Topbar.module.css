@@ -105,8 +105,27 @@
 .create input {
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: whitesmoke;
     border: 0.5px solid gray;
+}
+
+.inviteIcon {
+    position: relative;
+}
+
+.count {
+    background-color: rgb(157, 137, 253);
+    color: white;
+    position: absolute;
+    top: -16px;
+    left: 6px;
+    width: 15px;
+    height: 15px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    border-radius: 50%;
+    justify-content: center;
+    font-size: 0.625rem;
 }
 
 .invites,
@@ -159,23 +178,6 @@
     color: white;
 }
 
-.count {
-    background-color: rgb(157, 137, 253);
-    color: white;
-    position: absolute;
-    top: 20px;
-    right: 75px;
-    width: 15px;
-    height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    border-radius: 50%;
-    justify-content: center;
-    font-size: 0.625rem;
-}
-
 .profileIcon {
     align-items: center;
 }
@@ -203,4 +205,10 @@
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 374px) {
+    .topbar h3 {
+        display: none;
+    }
 }

@@ -32,7 +32,9 @@ const TeamSelect = ({createOpen, setCreateOpen, teams, teamsRef }) => {
             members: {
                 [auth.currentUser.uid]: {
                     name: auth.currentUser.displayName, 
-                    image: auth.currentUser.photoURL
+                    image: auth.currentUser.photoURL,
+                    email: auth.currentUser.email,
+                    role: "Owner"
                 }
             }
         });
