@@ -23,7 +23,6 @@
 .list input[type = text],
 .list input[type = date] {
     border: 1px solid whitesmoke;
-    background-color: whitesmoke;
     padding: 10px 20px;
     outline: none;
     border-radius: 5px;

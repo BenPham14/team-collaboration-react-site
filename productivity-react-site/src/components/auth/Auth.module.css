@@ -3,6 +3,15 @@
     width: 100vw;
     align-items: center;
     justify-content: center;
+    background-color:#ff99eb;
+    background-image:
+    radial-gradient(at 47% 21%, hsla(349,85%,78%,1) 0px, transparent 50%),
+    radial-gradient(at 23% 3%, hsla(275,77%,60%,1) 0px, transparent 50%),
+    radial-gradient(at 89% 94%, hsla(231,99%,74%,1) 0px, transparent 50%),
+    radial-gradient(at 30% 89%, hsla(262,91%,78%,1) 0px, transparent 50%),
+    radial-gradient(at 40% 12%, hsla(0,69%,74%,1) 0px, transparent 50%),
+    radial-gradient(at 23% 43%, hsla(262,92%,70%,1) 0px, transparent 50%),
+    radial-gradient(at 19% 92%, hsla(194,85%,77%,1) 0px, transparent 50%);
 }
 
 .login > div {
@@ -27,4 +36,7 @@
     padding: 10px 0;
     background-color: whitesmoke;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }

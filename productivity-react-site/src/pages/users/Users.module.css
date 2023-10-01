@@ -100,11 +100,9 @@
 }
 
 .invite input {
-    color: gray;
     padding: 5px 10px;
     border-radius: 5px;
     border: 0.5px solid gray;
-    background-color: whitesmoke;
 }
 
 .inviteButtons {

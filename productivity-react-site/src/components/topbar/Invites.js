@@ -65,9 +65,9 @@ const Invites = () => {
 
     return (
         <>
-            <div>
+            <div className={topbar.inviteIcon}>
                 <RiNotification3Line className="flex" title='Invites' onClick={() => setInvitesOpen(true)}/>
-                { invitesCount > 0 && <p className={topbar.count} onClick={() => setInvitesOpen(true)}>{invitesCount}</p> }
+                { invitesCount > 0 && <p className={`${topbar.count} flex`} onClick={() => setInvitesOpen(true)}>{invitesCount}</p> }
             </div>
             <dialog className={`${topbar.invites} blk-shadow`} ref={modalRef}>
                 <RiCloseCircleLine onClick={() => setInvitesOpen(false)} style={{cursor: "pointer"}}/>
