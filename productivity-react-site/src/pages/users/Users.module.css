@@ -144,10 +144,7 @@
     color: white;
 }
 
-.removeButton {
-    cursor: pointer;
-}
-
 .removeButton:hover {
     color: rgb(255, 110, 110);
+    cursor: pointer;
 }

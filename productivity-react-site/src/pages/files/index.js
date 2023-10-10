@@ -6,6 +6,7 @@ import { storage } from "../../config/firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { AppContext } from "../../context/AppContext";
 import {v4 as uuidv4} from 'uuid';
+import Remove from "./Remove";
 
 const Files = ({setIsAuth}) => {
     const [uploadOpen, setUploadOpen] = useState(false);
@@ -86,6 +87,13 @@ const Files = ({setIsAuth}) => {
                                         <td><a href={file.downloadURL} target="_blank">View file</a></td>
                                         {/* <td>{file.size}</td>
                                         <td>{file.lastModified}</td> */}
+                                        <td>
+                                            <Remove
+                                                file={file}
+                                                fileList={fileList}
+                                                setFileList={setFileList}
+                                            />
+                                        </td>
                                     </tr>
                                 ))
                             }

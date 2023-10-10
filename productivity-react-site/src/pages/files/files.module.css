@@ -67,7 +67,6 @@
 
 .item {
     border-bottom: 1px solid whitesmoke;
-    cursor: pointer;
 }
 
 .item:last-of-type {
@@ -81,4 +80,41 @@
 
 .item:hover {
     background-color: whitesmoke;
+}
+
+.removeModal {
+    border: 0.5px solid gray;
+    border-radius: 5px;
+}
+
+.removeModal p {
+    margin: 0;
+}
+
+.removeModal > div {
+    gap: 10px;
+    text-align: center;
+}
+
+.removeModalButtons {
+    display: flex;
+    gap: 5px;
+}
+
+.removeModalButtons button {
+    width: 100%;
+    border-radius: 5px;
+    border: 0.5px solid gray;
+    background-color: whitesmoke;
+    padding: 5px 10px;
+}
+
+.removeModalButtons button:first-of-type {
+    background-color: rgb(255, 110, 110);
+    color: white;
+}
+
+.removeButton:hover {
+    color: rgb(255, 110, 110);
+    cursor: pointer;
 }
