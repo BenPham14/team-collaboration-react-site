@@ -112,6 +112,10 @@
     outline: none;
 }
 
+.details input[type = date] {
+    background-color: white;
+}
+
 .header {
     justify-content: space-between;
     align-items: center;

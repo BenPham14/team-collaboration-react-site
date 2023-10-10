@@ -40,14 +40,17 @@ const Files = ({setIsAuth}) => {
             return;
         };
 
-        const fileRef = ref(storage, `${currentTeamUID}/${fileUpload.name + uuidv4()}`);
+        const fileRef = ref(storage, `${currentTeamUID}/${fileUpload.name}`); // fileUpload.name + uuidv4()
         uploadBytes(fileRef, fileUpload)
             .then((snapshot) => {
                 getDownloadURL(snapshot.ref)
                     .then((url) => {
-                        setFileList((prev) => [...prev, {downloadURL: url, name: snapshot.ref.name}]);
+                        setFileList(fileList.filter((file) => file.name != snapshot.ref.name)); // when I upload a new file, this will get rid of the existing file with same name in state
+                        setFileList((prev) => [...prev, {downloadURL: url, name: snapshot.ref.name}]); // then this put the new file into the array in state
                     });
             });
+
+        setUploadOpen(false);
     };
 
     return (
@@ -70,6 +73,7 @@ const Files = ({setIsAuth}) => {
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Link</th>
                                 {/* <th>Size</th>
                                 <th>Last Modified</th> */}
                             </tr>
@@ -78,7 +82,8 @@ const Files = ({setIsAuth}) => {
                             {
                                 fileList.map((file, index) => (
                                     <tr key={index} className={files.item}>
-                                        <td><a href={file.downloadURL}>{file.name}</a></td>
+                                        <td>{file.name}</td>
+                                        <td><a href={file.downloadURL} target="_blank">View file</a></td>
                                         {/* <td>{file.size}</td>
                                         <td>{file.lastModified}</td> */}
                                     </tr>
