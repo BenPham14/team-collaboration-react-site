@@ -5,3 +5,5 @@ This is a website that allows users to create teams and collaborate with other u
 [Firestore](https://firebase.google.com/docs/firestore)
 
 ## Demo
+https://github.com/BenPham14/productivity-react-site/assets/97713069/1fef9715-cf7d-4bc5-947e-ec86644b6b5a
+
