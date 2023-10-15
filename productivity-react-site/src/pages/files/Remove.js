@@ -1,7 +1,7 @@
 import { RiDeleteBin4Line } from "react-icons/ri";
 import files from './files.module.css';
 import { useContext, useEffect, useRef, useState } from "react";
-import { deleteObject, getDownloadURL, ref } from "firebase/storage";
+import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../config/firebase";
 import { AppContext } from "../../context/AppContext";
 
@@ -22,7 +22,7 @@ const Remove = ({file, fileList, setFileList}) => {
         const fileRef = ref(storage, `${currentTeamUID}/${file.name}`);
         deleteObject(fileRef)
             .then(() => {
-                setFileList(fileList.filter((f) => f.name != file.name));
+                setFileList(fileList.filter((f) => f.name !== file.name));
             });
         setRemoveOpen(false);
     };

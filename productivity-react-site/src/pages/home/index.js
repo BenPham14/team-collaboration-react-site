@@ -128,9 +128,12 @@ const Home = ({setIsAuth}) => {
                         {
                             tasks != [] ?
                             tasks.map((task, index) => (
-                                <div className="flex" key={index}>
+                                <div className={`${home.taskItem} flex`} key={index}>
                                     <input type="checkbox" onClick={() => deleteTask(task.id)}/>
-                                    <p key={index}>{task.label}</p>
+                                    <div className="flex">
+                                        <p key={index}>{task.label}</p>
+                                        <p>{task.date}</p>
+                                    </div>
                                 </div>
                             )) :
                             <p>No tasks to display</p>
